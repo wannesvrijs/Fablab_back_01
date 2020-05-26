@@ -1,6 +1,24 @@
-#easy_admin:
-#    entities:
-#        # List the entity class name you want to manage
-#        - App\Entity\Product
-#        - App\Entity\Category
-#        - App\Entity\User
+easy_admin:
+    design:
+        menu:
+            - {label: "My tabels"}
+            - label: "Fabmoments"
+              children:
+                  - {entity: Fabmoment, label: "Fabmoments list", icon: "tools"}
+                  - {entity: FabFile, label: "FabFiles", icon: "file"}
+                  - {entity: Fabmoment, label: "add Fabmoments", icon: "plus", params: {action: "new"}}
+
+            - {label: "My settings"}
+            - User
+            - Nieuws
+
+    site_name: 'FabLab Dashboard'
+    user:
+        display_avatar: false
+        name_property_path: 'useVn'
+
+    entities:
+        - App\Entity\User
+        - App\Entity\Nieuws
+        - App\Entity\FabFile
+        - App\Entity\Fabmoment

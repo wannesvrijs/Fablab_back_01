@@ -145,9 +145,14 @@ class Nieuws
         return $this->nwsStart;
     }
 
-    public function setNwsStart(?\DateTimeInterface $nwsStart): self
+    public function setNwsStart($nwsStart): self
     {
-        $this->nwsStart = $nwsStart;
+        try {
+            $this->nwsStart = new \DateTime($nwsStart);
+        }
+        catch(\Exception $e) {
+            //Do Nothing
+        }
 
         return $this;
     }
@@ -157,9 +162,14 @@ class Nieuws
         return $this->nwsStop;
     }
 
-    public function setNwsStop(\DateTimeInterface $nwsStop): self
+    public function setNwsStop($nwsStop): self
     {
-        $this->nwsStop = $nwsStop;
+        try {
+            $this->nwsStop = new \DateTime($nwsStop);
+        }
+        catch(\Exception $e) {
+            //Do Nothing
+        }
 
         return $this;
     }
@@ -169,9 +179,14 @@ class Nieuws
         return $this->nwsDelete;
     }
 
-    public function setNwsDelete(?\DateTimeInterface $nwsDelete): self
+    public function setNwsDelete($nwsDelete): self
     {
-        $this->nwsDelete = $nwsDelete;
+        try {
+            $this->nwsDelete = new \DateTime($nwsDelete);
+        }
+        catch(\Exception $e) {
+            //Do Nothing
+        }
 
         return $this;
     }

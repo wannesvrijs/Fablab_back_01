@@ -32,8 +32,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "security_message"="You can only update your own account"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
- *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}},
  * )
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"username"})

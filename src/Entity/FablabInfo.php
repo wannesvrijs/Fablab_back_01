@@ -49,6 +49,11 @@ class FablabInfo
      */
     private $infoOmschrijving;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $infoOrder = 50;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +79,18 @@ class FablabInfo
     public function setInfoOmschrijving(string $infoOmschrijving): self
     {
         $this->infoOmschrijving = $infoOmschrijving;
+
+        return $this;
+    }
+
+    public function getInfoOrder(): ?int
+    {
+        return $this->infoOrder;
+    }
+
+    public function setInfoOrder(int $infoOrder): self
+    {
+        $this->infoOrder = $infoOrder;
 
         return $this;
     }

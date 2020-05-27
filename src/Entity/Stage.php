@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\StageRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -35,20 +37,26 @@ class Stage
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"admin:read","admin:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:write"})
+     * @Groups({"stage:read","admin:write"})
      */
     private $stageSubtitel;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"admin:write"})
+     * @Groups({"stage:read","admin:write"})
      */
     private $stageOmschrijving;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stageOrder = 50;
 
     public function getId(): ?int
     {
@@ -75,6 +83,18 @@ class Stage
     public function setStageOmschrijving(string $stageOmschrijving): self
     {
         $this->stageOmschrijving = $stageOmschrijving;
+
+        return $this;
+    }
+
+    public function getStageOrder(): ?int
+    {
+        return $this->stageOrder;
+    }
+
+    public function setStageOrder(int $stageOrder): self
+    {
+        $this->stageOrder = $stageOrder;
 
         return $this;
     }

@@ -43,6 +43,11 @@ class FaqCategorie
     private $faqcatNaam;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $faqcatOrder = 50;
+
+    /**
      * @ORM\OneToMany(targetEntity=Faq::class, mappedBy="faqFaqcat")
      */
     private $faqs;
@@ -96,6 +101,18 @@ class FaqCategorie
                 $faq->setFaqFaqcat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFaqcatOrder(): ?int
+    {
+        return $this->faqcatOrder;
+    }
+
+    public function setFaqcatOrder(int $faqcatOrder): self
+    {
+        $this->faqcatOrder = $faqcatOrder;
 
         return $this;
     }

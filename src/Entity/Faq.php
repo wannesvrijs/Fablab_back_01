@@ -58,9 +58,9 @@ class Faq
     private $faqAntwoord;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $faqSort;
+    private $faqOrder = 50;
 
 
     public function getId(): ?int
@@ -92,18 +92,6 @@ class Faq
         return $this;
     }
 
-    public function getFaqSort(): ?int
-    {
-        return $this->faqSort;
-    }
-
-    public function setFaqSort(?int $faqSort): self
-    {
-        $this->faqSort = $faqSort;
-
-        return $this;
-    }
-
     public function getFaqFaqcat(): ?FaqCategorie
     {
         return $this->faqFaqcat;
@@ -112,6 +100,18 @@ class Faq
     public function setFaqFaqcat(?FaqCategorie $faqFaqcat): self
     {
         $this->faqFaqcat = $faqFaqcat;
+
+        return $this;
+    }
+
+    public function getFaqOrder(): ?int
+    {
+        return $this->faqOrder;
+    }
+
+    public function setFaqOrder(int $faqOrder): self
+    {
+        $this->faqOrder = $faqOrder;
 
         return $this;
     }

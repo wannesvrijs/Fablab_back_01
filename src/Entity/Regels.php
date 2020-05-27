@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RegelsRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -49,6 +51,11 @@ class Regels
      */
     private $regOmschrijving;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $regOrder = 50;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +81,18 @@ class Regels
     public function setRegOmschrijving(string $regOmschrijving): self
     {
         $this->regOmschrijving = $regOmschrijving;
+
+        return $this;
+    }
+
+    public function getRegOrder(): ?int
+    {
+        return $this->regOrder;
+    }
+
+    public function setRegOrder(int $regOrder): self
+    {
+        $this->regOrder = $regOrder;
 
         return $this;
     }

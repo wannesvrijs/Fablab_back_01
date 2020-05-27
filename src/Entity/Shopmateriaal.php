@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ShopmateriaalRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -18,7 +20,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get",
  *          "post"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
- *     itemOperations={},
  *     normalizationContext={},
  *     denormalizationContext={},
  *     attributes={
@@ -37,38 +38,45 @@ class Shopmateriaal
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"admin:read"})
      */
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=ShopCategorie::class, inversedBy="shopmaterialen")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"shopmateriaal:read", "admin:write"})
+     */
+    private $smatScat;
+
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:write"})
+     * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatNaam;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:write"})
-     */
-    private $smatOmschrijving;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:write"})
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatAfmeting;
 
     /**
-     * @ORM\Column(type="integer", length=255)
-     * @Groups({"admin:write"})
+     * @ORM\Column(type="string", length=10)
+     * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatPrijs;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"admin:write"})
+     * @Groups({"shopmateriaal:read", "shopcategorie:read","admin:write"})
      */
     private $smatInStock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $smatOrder = 50;
 
     public function getId(): ?int
     {
@@ -83,18 +91,6 @@ class Shopmateriaal
     public function setSmatNaam(string $smatNaam): self
     {
         $this->smatNaam = $smatNaam;
-
-        return $this;
-    }
-
-    public function getSmatOmschrijving(): ?string
-    {
-        return $this->smatOmschrijving;
-    }
-
-    public function setSmatOmschrijving(?string $smatOmschrijving): self
-    {
-        $this->smatOmschrijving = $smatOmschrijving;
 
         return $this;
     }
@@ -131,6 +127,30 @@ class Shopmateriaal
     public function setSmatInStock(bool $smatInStock): self
     {
         $this->smatInStock = $smatInStock;
+
+        return $this;
+    }
+
+    public function getSmatScat(): ?ShopCategorie
+    {
+        return $this->smatScat;
+    }
+
+    public function setSmatScat(?ShopCategorie $smatScat): self
+    {
+        $this->smatScat = $smatScat;
+
+        return $this;
+    }
+
+    public function getSmatOrder(): ?int
+    {
+        return $this->smatOrder;
+    }
+
+    public function setSmatOrder(int $smatOrder): self
+    {
+        $this->smatOrder = $smatOrder;
 
         return $this;
     }

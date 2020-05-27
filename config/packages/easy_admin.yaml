@@ -1,15 +1,17 @@
 easy_admin:
     design:
         menu:
-            - {label: "My tabels"}
+            - {label: "Mijn tabellen"}
             - label: "Fabmoments"
               children:
-                  - {entity: Fabmoment, label: "Fabmoments list", icon: "tools"}
-                  - {entity: FabFile, label: "FabFiles", icon: "file"}
-                  - {entity: Fabmoment, label: "add Fabmoments", icon: "plus", params: {action: "new"}}
-
-            - {label: "My settings"}
-            - User
+                    - {entity: Fabmoment, label: "Fabmoments lijst", icon: "tools"}
+                    - {entity: FabFile, label: "Fabmoment files", icon: "file"}
+            - {label: "Mijn gebruikers"}
+            - label: "Users"
+              children:
+                    - {entity: User, label: "Users lijst", icon: "user-astronaut"}
+                    - {entity: MachineRecht, label: "Machinerechten", icon: "tools"}
+                    - {entity: MachineRecht, label: "Add Machinerecht", icon: "plus", params: {action: 'new'}}
             - Nieuws
 
     site_name: 'FabLab Dashboard'
@@ -18,7 +20,9 @@ easy_admin:
         name_property_path: 'useVn'
 
     entities:
-        - App\Entity\User
-        - App\Entity\Nieuws
-        - App\Entity\FabFile
-        - App\Entity\Fabmoment
+    - App\Entity\User
+    - App\Entity\Nieuws
+    - App\Entity\FabFile
+    - App\Entity\Fabmoment
+    - App\Entity\MachineRecht
+

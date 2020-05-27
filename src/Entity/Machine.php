@@ -8,10 +8,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -117,7 +119,7 @@ class Machine
 
     /**
      * @ORM\OneToMany(targetEntity=MachineStaat::class, mappedBy="mstaatMach")
-     * @Groups({"machinecategorie:read","machine:read","admin:write"})
+     * @Groups({"admin:write"})
      */
     private $machineStaten;
 
@@ -357,6 +359,18 @@ class Machine
     public function getMachineStaten(): Collection
     {
         return $this->machineStaten;
+    }
+
+    /**
+     * @Groups({"machinecategorie:read", "machine:read"})
+     * @SerializedName("machineStaten")
+     */
+    public function getMachineStatenUpcomming()
+    {
+        $criteria = MachineRepository::createFilterByUpcommingCriteria();
+
+        return $this->machineStaten->matching($criteria);
+
     }
 
     public function addMachineStaten(MachineStaat $machineStaten): self

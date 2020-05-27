@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Machine;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,37 +15,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MachineRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Machine::class);
     }
 
-    // /**
-    //  * @return Machine[] Returns an array of Machine objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public static function createFilterByUpcommingCriteria()
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $now = new \DateTime(null, new \DateTimeZone('Europe/Brussels'));
 
-    /*
-    public function findOneBySomeField($value): ?Machine
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return Criteria::create()
+            ->andWhere(Criteria::expr()->gt('mstaatStop', $now))
+            ;
+
     }
-    */
 }

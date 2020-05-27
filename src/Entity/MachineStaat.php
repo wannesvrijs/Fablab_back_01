@@ -33,35 +33,38 @@ class MachineStaat
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"machinestaat:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineStaten")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"machinestaat:read", "admin:write"})
      */
     private $mstaatMach;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
     private $mstaatNaam;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
     private $mstaatStart;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
     private $mstaatStop;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $mstaatGoogleId;
 

@@ -80,7 +80,7 @@ class Event
     private $eveGoogleId;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="InsEve")
+     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insEve")
      */
     private $inschrijvings;
 

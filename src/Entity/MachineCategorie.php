@@ -35,34 +35,37 @@ class MachineCategorie
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"machinecategorie:read"})
      */
     private $id;
 
     /**
-     * @Groups({"machine_detail:read"})
      * @ORM\Column(type="string", length=255)
+     * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $mcatNaam;
 
     /**
-     * @Groups({"machine_detail:read"})
      * @ORM\Column(type="string", length=255)
+     * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $mcatOmschrijving;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $mcatImgPad;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $mcatImgAlt;
 
     /**
      * @ORM\OneToMany(targetEntity=Machine::class, mappedBy="machMcat")
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $machines;
 

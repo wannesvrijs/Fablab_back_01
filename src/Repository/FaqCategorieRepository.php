@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\FaqCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,10 @@ class FaqCategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, FaqCategorie::class);
     }
 
-    // /**
-    //  * @return FaqCategorie[] Returns an array of FaqCategorie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public static function createOrderedByOrderCriteria(): Criteria
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return Criteria::create()
+            ->orderBy(['faqOrder' => 'ASC'])
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?FaqCategorie
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

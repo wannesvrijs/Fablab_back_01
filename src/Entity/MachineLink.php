@@ -33,24 +33,26 @@ class MachineLink
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"machinelink:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineLinks")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"machinelink:read","admin:write"})
      */
     private $mlinkMach;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:item:read", "machinelink:read", "admin:write"})
      */
     private $mlinkTitel;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:item:read", "machinelink:read", "admin:write"})
      */
     private $mlinkPad;
 

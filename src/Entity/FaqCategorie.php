@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FaqCategorieRepository;
+use App\Repository\ShopCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ApiResource(
@@ -80,6 +83,17 @@ class FaqCategorie
     public function getFaqs(): Collection
     {
         return $this->faqs;
+    }
+
+    /**
+     * @SerializedName("faqs")
+     * @Groups({"faqcategorie:read"})
+     */
+    public function getShopmaterialenOrdered()
+    {
+        $criteria = FaqCategorieRepository::createOrderedByOrderCriteria();
+
+        return $this->faqs->matching($criteria);
     }
 
     public function addFaq(Faq $faq): self

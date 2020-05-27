@@ -7,10 +7,12 @@ use App\Repository\MateriaalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -33,16 +35,19 @@ class Materiaal
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"materiaal:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"materiaal:read","admin:write"})
      */
     private $matNaam;
 
     /**
      * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatMat")
+     * @Groups({"materiaal:read"})
      */
     private $fabMats;
 

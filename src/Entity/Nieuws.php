@@ -76,12 +76,6 @@ class Nieuws
     private $nwsStop;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"admin:write","admin:read"})
-     */
-    private $nwsDelete;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"admin:write","admin:read"})
      */
@@ -166,23 +160,6 @@ class Nieuws
     {
         try {
             $this->nwsStop = new \DateTime($nwsStop);
-        }
-        catch(\Exception $e) {
-            //Do Nothing
-        }
-
-        return $this;
-    }
-
-    public function getNwsDelete(): ?\DateTimeInterface
-    {
-        return $this->nwsDelete;
-    }
-
-    public function setNwsDelete($nwsDelete): self
-    {
-        try {
-            $this->nwsDelete = new \DateTime($nwsDelete);
         }
         catch(\Exception $e) {
             //Do Nothing

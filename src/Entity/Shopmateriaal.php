@@ -75,6 +75,7 @@ class Shopmateriaal
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"admin:write"})
      */
     private $smatOrder = 50;
 

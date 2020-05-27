@@ -41,18 +41,19 @@ class Regels
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"admin:write"})
+     * @Groups({"regels:read","admin:write"})
      */
     private $regNaam;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"admin:write"})
+     * @Groups({"regels:read","admin:write"})
      */
     private $regOmschrijving;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"admin:write"})
      */
     private $regOrder = 50;
 

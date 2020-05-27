@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ShopCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,11 @@ class ShopCategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, ShopCategorie::class);
     }
 
-    // /**
-    //  * @return ShopCategorie[] Returns an array of ShopCategorie objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ShopCategorie
+    public static function createOrderedByOrderCriteria(): Criteria
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        return Criteria::create()
+            ->orderBy(['smatOrder' => 'ASC'])
         ;
     }
-    */
 }

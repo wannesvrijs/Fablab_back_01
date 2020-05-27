@@ -33,24 +33,26 @@ class MachineFile
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"machinefile:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineFiles")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"machinefile:read", "admin:write"})
      */
     private $mfileMach;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:item:read", "machinefile:read", "admin:write"})
      */
     private $mfileTitel;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machine_detail:read"})
+     * @Groups({"machinecategorie:item:read", "machinefile:read", "admin:write"})
      */
     private $mfilePad;
 

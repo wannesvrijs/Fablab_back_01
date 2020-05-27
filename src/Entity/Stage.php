@@ -55,6 +55,7 @@ class Stage
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"admin:write"})
      */
     private $stageOrder = 50;
 

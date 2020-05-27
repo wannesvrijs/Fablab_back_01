@@ -25,11 +25,11 @@ class OrderByOrderExtension implements QueryCollectionExtensionInterface
         }
         if ($resourceClass === ShopCategorie::class){
             $rootalias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->orderBy(sprintf('%s.sCatOrder', $rootalias));
+            $queryBuilder->orderBy(sprintf('%s.scatOrder', $rootalias));
         }
         if ($resourceClass === Shopmateriaal::class){
             $rootalias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->orderBy(sprintf('%s.sMatOrder', $rootalias));
+            $queryBuilder->orderBy(sprintf('%s.smatOrder', $rootalias));
         }
         if ($resourceClass === Regels::class){
             $rootalias = $queryBuilder->getRootAliases()[0];

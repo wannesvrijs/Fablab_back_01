@@ -7,8 +7,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ShopCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ApiResource(
@@ -48,13 +50,12 @@ class ShopCategorie
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"admin:write", "shopcategorie:read", "shopcategorie:write"})
+     * @Groups({"admin:write"})
      */
     private $scatOrder = 50;
 
     /**
      * @ORM\OneToMany(targetEntity=Shopmateriaal::class, mappedBy="smatScat")
-     * @Groups({"shopcategorie:read"})
      */
     private $shopmaterialen;
 
@@ -98,6 +99,17 @@ class ShopCategorie
     public function getShopmaterialen(): Collection
     {
         return $this->shopmaterialen;
+    }
+
+    /**
+     * @SerializedName("shopmaterialen")
+     * @Groups({"shopcategorie:read"})
+     */
+    public function getShopmaterialenOrdered()
+    {
+        $criteria = ShopCategorieRepository::createOrderedByOrderCriteria();
+
+        return $this->shopmaterialen->matching($criteria);
     }
 
     public function addShopmaterialen(Shopmateriaal $shopmaterialen): self

@@ -122,6 +122,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.0.1"
+    },
     "easycorp/easyadmin-bundle": {
         "version": "2.0",
         "recipe": {
@@ -157,9 +160,6 @@
             "config/packages/test/hautelook_alice.yaml",
             "fixtures/.gitignore"
         ]
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "lcobucci/jwt": {
         "version": "3.3.2"

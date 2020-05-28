@@ -7,6 +7,7 @@ use App\Repository\LandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -27,16 +28,19 @@ class Land
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"land:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Groups({"land:read"})
      */
     private $landNaam;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="useLand")
+     * @Groups({"land:read","admin:write"})
      */
     private $users;
 

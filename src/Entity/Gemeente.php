@@ -5,11 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GemeenteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={},
+ *     itemOperations={"get"},
  *     normalizationContext={},
  *     denormalizationContext={},
  *     attributes={
@@ -25,16 +26,19 @@ class Gemeente
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"gemeente:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Groups({"gemeente:read"})
      */
     private $gemPostcode;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Groups({"gemeente:read"})
      */
     private $gemNaam;
 

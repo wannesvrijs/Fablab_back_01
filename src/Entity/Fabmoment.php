@@ -93,11 +93,6 @@ class Fabmoment
      */
     private $fabFiles;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=FabmomentHelper::class, inversedBy="fabhelpfab")
-     */
-    private $fabmomentHelper;
-
 
 
     public function __construct()
@@ -310,15 +305,4 @@ class Fabmoment
         return $this;
     }
 
-    public function getFabmomentHelper(): ?FabmomentHelper
-    {
-        return $this->fabmomentHelper;
-    }
-
-    public function setFabmomentHelper(?FabmomentHelper $fabmomentHelper): self
-    {
-        $this->fabmomentHelper = $fabmomentHelper;
-
-        return $this;
-    }
 }

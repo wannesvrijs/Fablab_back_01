@@ -7,6 +7,7 @@ use App\Repository\FabmomentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 //     TODO:
@@ -66,6 +67,11 @@ class Fabmoment
      */
     private $fabIsPosted;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"fabTitel"})
+     */
+    private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity=FabImg::class, mappedBy="fabimgFab")
@@ -86,6 +92,12 @@ class Fabmoment
      * @ORM\OneToMany(targetEntity=FabFile::class, mappedBy="fabfileFab")
      */
     private $fabFiles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=FabmomentHelper::class, inversedBy="fabhelpfab")
+     */
+    private $fabmomentHelper;
+
 
 
     public function __construct()
@@ -282,6 +294,30 @@ class Fabmoment
                 $fabFile->setFabfileFab(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getFabmomentHelper(): ?FabmomentHelper
+    {
+        return $this->fabmomentHelper;
+    }
+
+    public function setFabmomentHelper(?FabmomentHelper $fabmomentHelper): self
+    {
+        $this->fabmomentHelper = $fabmomentHelper;
 
         return $this;
     }

@@ -8,12 +8,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //  TODO:
 /**
  * @ApiResource(
- *     collectionOperations={},
- *     itemOperations={},
+ *     itemOperations={
+ *          "get",
+ *          "put"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *     },
  *     normalizationContext={},
  *     denormalizationContext={},
  *     attributes={
@@ -31,56 +39,67 @@ class Event
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"admin:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $eveTitel;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"event:read", "admin:write"})
      */
     private $eveOmschrijving;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event:read", "admin:write"})
      */
     private $eveImgPad;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event:read", "admin:write"})
      */
     private $eveImgAlt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"event:read", "admin:write"})
      */
     private $eveMaxPers;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $eveStart;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $eveStop;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $evePrijs;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"admin:read"})
      */
     private $eveGoogleId;
 
     /**
      * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insEve")
+     * @Groups({"event:read"})
      */
     private $inschrijvings;
 

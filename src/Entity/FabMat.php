@@ -9,11 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 //     TODO:
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
  *     itemOperations={
- *          "get"={},
- *          "put",
- *          "delete"
+ *          "get",
+ *          "put"={"security"="is_granted('ROLE_User')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     collectionOperations={
+ *          "get"= {},
+ *          "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     normalizationContext={},
  *     denormalizationContext={},

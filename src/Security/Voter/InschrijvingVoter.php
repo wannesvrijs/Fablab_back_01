@@ -2,13 +2,13 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Fabmoment;
+use App\Entity\Inschrijving;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class FabMomentVoter extends Voter
+class InschrijvingVoter extends Voter
 {
 
     private $security;
@@ -22,8 +22,8 @@ class FabMomentVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['EDIT'])
-            && $subject instanceof Fabmoment;
+        return in_array($attribute, ['READ'])
+            && $subject instanceof Inschrijving;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -35,20 +35,21 @@ class FabMomentVoter extends Voter
         }
 
         /**
-         * @var Fabmoment $subject
+         * @var Inschrijving $subject
          */
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case 'EDIT':
-                if ($subject->getFabUse() === $user) {
+            case 'READ':
+                if($subject->getInsUse() === $user) {
                     return true;
                 }
                 if ($this->security->isGranted("ROLE_ADMIN")) {
                     return true;
                 }
+                return false;
         }
 
-        return false;
+        throw new \Exception(sprintf('Unhandled attribute "%s"', $attribute));
     }
 }

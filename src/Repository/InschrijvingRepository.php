@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Inschrijving;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @method Inschrijving|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class InschrijvingRepository extends ServiceEntityRepository
 {
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Inschrijving::class);

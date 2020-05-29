@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+use App\Repository\InschrijvingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,11 +29,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          },
  *     },
  *     itemOperations={
- *          "get"={},
+ *          "get"={"security"="is_granted('ROLE_USER') and object == user",
+ *              "security_message"="You can only read your own User data"},
  *          "put"={"security"="is_granted('ROLE_USER') and object == user",
  *              "security_message"="You can only update your own account"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
- *     },
+ *     }
  * )
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"username"})
@@ -52,14 +55,16 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity=Land::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"user:read", "user:write"})
+     * @Assert\NotBlank(message="Vul een land in")
      */
     private $useLand;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(message="Vul een geldig Emailadres in")
+     * @Assert\Email(message="Vul een geldig Emailadres in")
+     * @Assert\Unique(message="dit Emailadres is reeds in gebruik")
      */
     private $email;
 
@@ -78,17 +83,36 @@ class User implements UserInterface
     /**
      * @Groups({"user:write"})
      * @SerializedName("password")
-     * @Assert\NotBlank(groups={"create"})
+     * @Assert\NotBlank(groups={"create"}, message="Vul een geldig wachtwoord in")
+     * @Assert\Length(
+     *     min="8",
+     *     minMessage="je wachtwoord moet minimaal 8 tekens bevatten"
+     * )
+     * @Assert\Regex (
+     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
+     *      message="gebruik minimaal 1 hoofdletter, 1 kleine letter, and 1 nummer"
+     * )
      */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank(message="Vul je voornaam in")
+     * @Assert\Length(
+     *     min="2",
+     *     minMessage="je voornaam moet minimaal 2 tekens bevatten"
+     * )
+     *
      */
     private $useVn;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank(message="Vul je achternaam in")
+     * @Assert\Length(
+     *     min="8",
+     *     minMessage="je achternaam moet minimaal 2 tekens bevatten"
+     * )
      */
     private $useAn;
 
@@ -159,11 +183,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Fabmoment::class, mappedBy="fabUse")
+     * @ApiSubresource(maxDepth=1)
      */
     private $fabmoments;
 
     /**
      * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insUse")
+     * @Groups({"user:read"})
      */
     private $inschrijvingen;
 
@@ -541,6 +567,7 @@ class User implements UserInterface
     {
         return $this->inschrijvingen;
     }
+
 
     public function addInschrijvingen(Inschrijving $inschrijvingen): self
     {

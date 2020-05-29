@@ -2,23 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InschrijvingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-
-//     TODO:
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     attributes={"security"="is_granted('ROLE_USER')"},
  *     itemOperations={
- *          "get"={},
- *          "put",
- *          "delete"
+ *          "get",
+ *          "put"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')"}
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
+ *     collectionOperations={
+ *          "get"= {},
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
  *     attributes={
  *          "pagination_items_per_page"=10,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
@@ -40,12 +43,14 @@ class Inschrijving
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="inschrijvingen")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"event:read", "inschrijving:read"})
      */
     private $insUse;
 
     /**
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="inschrijvings")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"inschrijving:read"})
      */
     private $insEve;
 

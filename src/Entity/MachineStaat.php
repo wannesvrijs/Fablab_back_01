@@ -132,4 +132,9 @@ class MachineStaat
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->mstaatNaam;
+    }
 }

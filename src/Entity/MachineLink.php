@@ -96,4 +96,9 @@ class MachineLink
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->mlinkTitel;
+    }
 }

@@ -157,4 +157,9 @@ class MachineCategorie
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->mcatNaam;
+    }
 }

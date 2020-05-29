@@ -1,28 +1,210 @@
 easy_admin:
     design:
         menu:
-            - {label: "Mijn tabellen"}
+
+            - {label: "Info"}
+            - label: "Paginacontent"
+              children:
+                    - {entity: FablabInfo, label: "'Wat is FabLab'", icon: "info"}
+                    - {entity: Regels, label: "Huisregels", icon: "gavel"}
+                    - {entity: FaqCategorie, label: "FAQ Categorie", icon: "question-circle"}
+                    - {entity: Faq, label: "FAQ", icon: "question"}
+                    - {entity: Stage, label: "Stage", icon: "child"}
+            - label: "Machines"
+              children:
+                    - {entity: MachineCategorie, label: "Machines Catgorie", icon: "cogs"}
+                    - {entity: Machine, label: "Machines", icon: "cog"}
+                    - {entity: MachineStaat, label: "Machine Staat", icon: "thermometer-half"}
+                    - {entity: MachineLink, label: "Tutorial Links", icon: "link"}
+                    - {entity: MachineFile, label: "Opmaakvoorbeeld Files", icon: "paperclip"}
+            - label: "Shop"
+              children:
+                    - {entity: ShopCategorie, label: "Shop Categorie", icon: "cubes"}
+                    - {entity: Shopmateriaal, label: "Shop Item", icon: "cube"}
+
+
+            - {label: "Fabmoments"}
             - label: "Fabmoments"
               children:
-                    - {entity: Fabmoment, label: "Fabmoments lijst", icon: "tools"}
-                    - {entity: FabFile, label: "Fabmoment files", icon: "file"}
-            - {label: "Mijn gebruikers"}
+                    - {entity: Fabmoment, label: "Fabmoments", icon: "tools"}
+                    - {entity: FabImg, label: "Fabmoment Foto's", icon: "image"}
+                    - {entity: FabFile, label: "Fabmoment Files", icon: "paperclip"}
+                    - {entity: Materiaal, label: "Fabmoment Materialen", icon: "cube"}
+                    - {entity: FabMat, label: "(LINK) Fabmoment/materialen", icon: "ban"}
+                    - {entity: FabMach, label: "(LINK) Fabmoment/machine", icon: "ban"}
+
+
+            - {label: "Nieuws & Events"}
+            - label: "Nieuws"
+              children:
+                    - {entity: Nieuws, label: "Nieuws", icon: "newspaper"}
+            - label: "Events"
+              children:
+                - {entity: Event, label: "Event", icon: "calendar"}
+                - {entity: Inschrijving, label: "Inschrijvingen", icon: "calendar-check"}
+
+
+            - {label: "Users"}
             - label: "Users"
               children:
                     - {entity: User, label: "Users lijst", icon: "user-astronaut"}
-                    - {entity: MachineRecht, label: "Machinerechten", icon: "tools"}
-                    - {entity: MachineRecht, label: "Add Machinerecht", icon: "plus", params: {action: 'new'}}
-            - Nieuws
+                    - {entity: MachineRecht, label: "Machinerechten", icon: "thumbs-up"}
+                    - {entity: MachineLog, label: "Machine-logs", icon: "stopwatch"}
+
+
+#GLOBAL==============================================================================================================================
+#==============================================================================================================================
+
 
     site_name: 'FabLab Dashboard'
     user:
         display_avatar: false
         name_property_path: 'useVn'
 
-    entities:
-    - App\Entity\User
-    - App\Entity\Nieuws
-    - App\Entity\FabFile
-    - App\Entity\Fabmoment
-    - App\Entity\MachineRecht
+    formats:
+      date:     'd/m/Y'
+      time:     'H:i'
+      datetime: 'd/m/Y H:i'
 
+    list:
+      actions:
+        - { name: 'show', icon: 'eye', label: '' }
+        - { name: 'edit', icon: 'pencil', label: '' }
+        - {name: 'delete', icon: 'trash-alt', label: '' }
+
+
+
+#ENTITIES==============================================================================================================================
+#==============================================================================================================================
+
+    entities:
+#Info==============================================================================================================================
+  #Paginacontent--------------------------------------------------------------------------------------------------------------------
+      FablabInfo:
+        class: App\Entity\FablabInfo
+        list:
+          fields: ['infoOrder', 'infoSubtitel', 'infoOmschrijving', 'updatedAt']
+        form:
+          fields:
+            - infoSubtitel
+            - {property: 'infoOmschrijving', type: 'text-editor'}
+            - {property: 'infoOrder', label: 'rangschikking op pagina'}
+      Regels:
+        class: App\Entity\Regels
+        list:
+          fields: ['regOrder', 'regNaam', 'regOmschrijving', 'updatedAt']
+        form:
+          fields:
+            - regNaam
+            - {property: 'regOmschrijving', type: 'text-editor'}
+            - {property: 'regOrder', label: 'rangschikking op pagina'}
+      FaqCategorie:
+        class: App\Entity\FaqCategorie
+        list:
+          fields: ['faqcatOrder', 'faqcatNaam']
+        form:
+          fields:
+            - {property: 'faqcatNaam', label: 'Faq Categorienaam'}
+            - {property: 'faqcatOrder', label: 'rangschikking op pagina'}
+      Faq:
+        class: App\Entity\Faq
+        list:
+          fields: ['faqOrder', {property: 'faqFaqcat', label: 'faq Categorie'} ,'faqVraag', 'faqAntwoord', 'updatedAt']
+        form:
+          fields:
+            - {property: 'faqFaqcat', label: 'faq Categorie'}
+            - faqVraag
+            - {property: 'faqAntwoord', type: 'text-editor'}
+            - {property: 'faqOrder', label: 'rangschikking binnen categorie'}
+      Stage:
+        class: App\Entity\Stage
+        list:
+          fields: ['stageOrder', 'stageSubtitel', 'stageOmschrijving', 'updatedAt']
+        form:
+          fields:
+            - stageSubtitel
+            - {property: 'stageOmschrijving', type: 'text-editor'}
+            - {property: 'stageOrder', label: 'rangschikking op pagina'}
+
+  #Machines--------------------------------------------------------------------------------------------------------------------
+      MachineCategorie:
+        class: App\Entity\MachineCategorie
+        list:
+          fields: ['mcatImgPad', 'mcatNaam' ,'mcatOmschrijving']
+        form:
+          fields:
+            - {property: 'mcatNaam', label: 'Categorie'}
+            - {property: 'mcatOmschrijving', label: 'Categorie Omschrijving'}
+            - {property: 'mcatImgPad', label: 'Afbeelding'}
+            - {property: 'mcatImgAlt', label: 'Afbeelding Omschrijving'}
+            - {property: 'machines', label: 'Machines'}
+      Machine:
+        class: App\Entity\Machine
+        list:
+          fields: ['machMcat', 'machImgPad', 'machNaam', 'machOmschrijving' ]
+        form:
+          fields:
+            - {property: 'machMcat', label: 'Machine Categorie'}
+            - {property: 'machNaam', label: 'Machine Naam'}
+            - {property: 'machOmschrijving', label: 'Machine Omschrijving'}
+            - {property: 'machImgPad', label: 'Afbeelding'}
+            - {property: 'machImgAlt', label: 'Afbeelding Omschrijving'}
+      MachineStaat:
+        class: App\Entity\MachineStaat
+        list:
+          fields: []
+        form:
+          fields:
+            - XX
+      MachineLink:
+        class: App\Entity\MachineLink
+        list:
+          fields: []
+        form:
+          fields:
+            - XX
+      MachineFile:
+        class: App\Entity\MachineFile
+        list:
+          fields: []
+        form:
+          fields:
+            - XX
+
+  #Shop--------------------------------------------------------------------------------------------------------------------
+      ShopCategorie:
+        class: App\Entity\ShopCategorie
+      Shopmateriaal:
+        class: App\Entity\Shopmateriaal
+
+#fabmoment==============================================================================================================================
+      Fabmoment:
+        class: App\Entity\Fabmoment
+      FabImg:
+        class: App\Entity\FabImg
+      FabFile:
+        class: App\Entity\FabFile
+      Materiaal:
+        class: App\Entity\Materiaal
+      FabMat:
+        class: App\Entity\FabMat
+      FabMach:
+        class: App\Entity\FabMach
+
+#Nieuws & Events==============================================================================================================================
+  #Nieuws--------------------------------------------------------------------------------------------------------------------
+      Nieuws:
+        class: App\Entity\Nieuws
+  #Nieuws--------------------------------------------------------------------------------------------------------------------
+      Event:
+        class: App\Entity\Event
+      Inschrijving:
+        class: App\Entity\Inschrijving
+
+#user==============================================================================================================================
+      User:
+        class: App\Entity\User
+      MachineRecht:
+        class: App\Entity\MachineRecht
+      MachineLog:
+        class: App\Entity\MachineLog

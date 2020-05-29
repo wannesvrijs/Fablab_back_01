@@ -130,4 +130,9 @@ class FaqCategorie
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->faqcatNaam;
+    }
 }

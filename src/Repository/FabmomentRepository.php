@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Fabmoment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,25 @@ class FabmomentRepository extends ServiceEntityRepository
         parent::__construct($registry, Fabmoment::class);
     }
 
-    // /**
-    //  * @return Fabmoment[] Returns an array of Fabmoment objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    /**
+     * @return Fabmoment[]
+     */
+    public function findFabmomentCollection()
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('fab')
+            ->leftJoin('fab.fabFiles', 'ff')
+            ->addSelect('ff')
+            ->orderBy('fab.fabDatum', 'DESC')
             ->getQuery()
             ->getResult()
-        ;
-    }
-    */
+            ;
 
-    /*
-    public function findOneBySomeField($value): ?Fabmoment
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
-    */
+
+    public function findFabmomentItem()
+    {
+
+    }
+
 }

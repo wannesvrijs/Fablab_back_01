@@ -25,7 +25,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  *     normalizationContext={},
  *     denormalizationContext={},
  *     attributes={
- *          "pagination_items_per_page"=10,
+ *          "pagination_items_per_page"=12,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
@@ -303,6 +303,11 @@ class Fabmoment
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->fabTitel;
     }
 
 }

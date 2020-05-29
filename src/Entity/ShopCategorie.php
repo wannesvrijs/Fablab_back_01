@@ -134,4 +134,8 @@ class ShopCategorie
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->scatNaam;
+    }
 }

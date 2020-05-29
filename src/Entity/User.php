@@ -555,10 +555,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function __toString(): ?string
-    {
-        return $this->getUsername();
-    }
 
     /**
      * @return Collection|Inschrijving[]
@@ -592,53 +588,6 @@ class User implements UserInterface
         return $this;
     }
 
-//
-//    /**
-//     * @return Collection|CheeseListing[]
-//     */
-//    public function getCheeseListings(): Collection
-//    {
-//        return $this->cheeseListings;
-//    }
-//
-//    /**
-//     * @Groups({"user:read"})
-//     * @SerializedName("cheeseListings")
-//     */
-//    public function getPublishedCheeseListings()
-//    {
-//        return $this->cheeseListings->filter(function(CheeseListing $cheeseListing) {
-//            return $cheeseListing->getIsPublished();
-//        });
-//
-//        //TODO: implement collection criteria (zie les 10 van mastering doctrine relations)
-//    }
-//
-//    public function addCheeseListing(CheeseListing $cheeseListing): self
-//    {
-//        if (!$this->cheeseListings->contains($cheeseListing)) {
-//            $this->cheeseListings[] = $cheeseListing;
-//            $cheeseListing->setOwner($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeCheeseListing(CheeseListing $cheeseListing): self
-//    {
-//        if ($this->cheeseListings->contains($cheeseListing)) {
-//            $this->cheeseListings->removeElement($cheeseListing);
-//            // set the owning side to null (unless already changed)
-//            if ($cheeseListing->getOwner() === $this) {
-//                $cheeseListing->setOwner(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
-
-
-
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -651,15 +600,8 @@ class User implements UserInterface
         return $this;
     }
 
-//    public function getPhoneNumber(): ?string
-//    {
-//        return $this->phoneNumber;
-//    }
-//
-//    public function setPhoneNumber(?string $phoneNumber): self
-//    {
-//        $this->phoneNumber = $phoneNumber;
-//
-//        return $this;
-//    }
+    public function __toString(): ?string
+    {
+        return $this->useVn.' '.$this->useAn.' ('.$this->email.')';
+    }
 }

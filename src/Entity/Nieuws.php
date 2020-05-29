@@ -179,4 +179,8 @@ class Nieuws
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nwsTitel;
+    }
 }

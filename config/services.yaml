@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    cache_adapter: cache.adapter.filesystem
     uploads_machine_images_path: '/uploads/files/machine/images'
     uploads_machine_file_path: '/uploads/files/machine/files'
 

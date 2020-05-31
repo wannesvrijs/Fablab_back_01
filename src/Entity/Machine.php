@@ -7,8 +7,10 @@ use App\Repository\MachineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
@@ -29,9 +31,13 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *     }
  * )
  * @ORM\Entity(repositoryClass=MachineRepository::class)
+ * @Vich\Uploadable()
  */
 class Machine
 {
+
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -130,10 +136,32 @@ class Machine
     private $machineLinks;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineFile::class, mappedBy="mfileMach")
+     * @ORM\OneToMany(targetEntity=MachineFile::class, mappedBy="mfileMach", cascade={"persist"})
      * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
      */
     private $machineFiles;
+
+    /**
+     * @Vich\UploadableField(mapping="machine_img", fileNameProperty="machImgPad")
+     */
+    private $machImgFile;
+
+    /**
+     * @return mixed
+     */
+    public function getMachImgFile()
+    {
+        return $this->machImgFile;
+    }
+
+    /**
+     * @param mixed $machImgFile
+     */
+    public function setMachImgFile($machImgFile): void
+    {
+        $this->machImgFile = $machImgFile;
+        $this->updatedAt = new \DateTime();
+    }
 
 
 

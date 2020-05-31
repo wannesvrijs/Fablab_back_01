@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    uploads_machine_images_path: '/uploads/files/machine/images'
+    uploads_machine_file_path: '/uploads/files/machine/files'
 
 services:
     # default configuration for services in *this* file

@@ -15,8 +15,8 @@ easy_admin:
                     - {entity: MachineCategorie, label: "Machines Catgorie", icon: "cogs"}
                     - {entity: Machine, label: "Machines", icon: "cog"}
                     - {entity: MachineStaat, label: "Machine Staat", icon: "thermometer-half"}
-                    - {entity: MachineLink, label: "Tutorial Links", icon: "link"}
-                    - {entity: MachineFile, label: "Opmaakvoorbeeld Files", icon: "paperclip"}
+                    - {entity: MachineLink, label: "Informatie Links", icon: "link"}
+                    - {entity: MachineFile, label: "Opmaak Files", icon: "paperclip"}
             - label: "Shop"
               children:
                     - {entity: ShopCategorie, label: "Shop Categorie", icon: "cubes"}
@@ -30,8 +30,6 @@ easy_admin:
                     - {entity: FabImg, label: "Fabmoment Foto's", icon: "image"}
                     - {entity: FabFile, label: "Fabmoment Files", icon: "paperclip"}
                     - {entity: Materiaal, label: "Fabmoment Materialen", icon: "cube"}
-                    - {entity: FabMat, label: "(LINK) Fabmoment/materialen", icon: "ban"}
-                    - {entity: FabMach, label: "(LINK) Fabmoment/machine", icon: "ban"}
 
 
             - {label: "Nieuws & Events"}
@@ -40,8 +38,8 @@ easy_admin:
                     - {entity: Nieuws, label: "Nieuws", icon: "newspaper"}
             - label: "Events"
               children:
-                - {entity: Event, label: "Event", icon: "calendar"}
-                - {entity: Inschrijving, label: "Inschrijvingen", icon: "calendar-check"}
+                    - {entity: Event, label: "Event", icon: "calendar"}
+                    - {entity: Inschrijving, label: "Inschrijvingen", icon: "calendar-check"}
 
 
             - {label: "Users"}
@@ -70,7 +68,7 @@ easy_admin:
       actions:
         - { name: 'show', icon: 'eye', label: '' }
         - { name: 'edit', icon: 'pencil', label: '' }
-        - {name: 'delete', icon: 'trash-alt', label: '' }
+        - { name: 'delete', icon: 'trash-alt', label: '' }
 
 
 
@@ -83,54 +81,103 @@ easy_admin:
       FablabInfo:
         class: App\Entity\FablabInfo
         list:
-          fields: ['infoOrder', 'infoSubtitel', 'infoOmschrijving', 'updatedAt']
+          sort: ['infoOrder', 'ASC']
+          fields:
+            - {property: 'infoOrder', label: 'Rangschikking'}
+            - {property: 'infoSubtitel', label: 'Subtitel'}
+            - {property: 'infoOmschrijving', type: 'raw', label: 'Omschrijving' }
+            - updatedAt
         form:
           fields:
-            - infoSubtitel
-            - {property: 'infoOmschrijving', type: 'text-editor'}
-            - {property: 'infoOrder', label: 'rangschikking op pagina'}
+            - {property: 'infoSubtitel', label: 'Subtitel'}
+            - {property: 'infoOmschrijving', type: 'text-editor', label: 'Omschrijving'}
+            - {property: 'infoOrder', label: 'Rangschikking'}
+        show:
+          fields:
+            - {property: 'infoSubtitel', label: 'Subtitel'}
+            - {property: 'infoOmschrijving', type: 'raw', label: 'Omschrijving' }
+            - {property: 'infoOrder', label: 'Rangschikking'}
       Regels:
         class: App\Entity\Regels
         list:
-          fields: ['regOrder', 'regNaam', 'regOmschrijving', 'updatedAt']
+          sort: ['regOrder', 'ASC']
+          fields:
+            - {property: 'regOrder', label: 'Rangschikking'}
+            - {property: 'regNaam', label: 'Regel'}
+            - {property: 'regOmschrijving', type: 'raw', label: 'Omschrijving'}
+            - updatedAt
         form:
           fields:
-            - regNaam
-            - {property: 'regOmschrijving', type: 'text-editor'}
-            - {property: 'regOrder', label: 'rangschikking op pagina'}
+            - {property: 'regNaam', label: 'Regel'}
+            - {property: 'regOmschrijving', type: 'text-editor', label: 'Omschrijving'}
+            - {property: 'regOrder', label: 'Rangschikking'}
+        show:
+          fields:
+            - {property: 'regNaam', label: 'Regel'}
+            - {property: 'regOmschrijving', type: 'raw', label: 'Omschrijving'}
+            - {property: 'regOrder', label: 'Rangschikking'}
       FaqCategorie:
         class: App\Entity\FaqCategorie
         list:
-          fields: ['faqcatOrder', 'faqcatNaam']
+          sort: ['faqcatOrder', 'ASC']
+          fields:
+            - {property: 'faqcatOrder', label: 'Rangschikking'}
+            - {property: 'faqcatNaam', label: 'Categorie naam'}
         form:
           fields:
-            - {property: 'faqcatNaam', label: 'Faq Categorienaam'}
-            - {property: 'faqcatOrder', label: 'rangschikking op pagina'}
+            - {property: 'faqcatNaam', label: 'Categorie naam'}
+            - {property: 'faqcatOrder', label: 'Rangschikking'}
       Faq:
         class: App\Entity\Faq
         list:
-          fields: ['faqOrder', {property: 'faqFaqcat', label: 'faq Categorie'} ,'faqVraag', 'faqAntwoord', 'updatedAt']
+        formats:
+          sort: ['faqOrder', 'ASC']
+          fields:
+            - {property: 'faqOrder', label: 'Rangschikking'}
+            - {property: 'faqFaqcat', label: 'Categorie'}
+            - {property: 'faqVraag', label: 'Vraag'}
+            - {property: 'faqAntwoord', type: 'raw', label: 'Antwoord'}
+            - updatedAt
         form:
           fields:
-            - {property: 'faqFaqcat', label: 'faq Categorie'}
-            - faqVraag
-            - {property: 'faqAntwoord', type: 'text-editor'}
-            - {property: 'faqOrder', label: 'rangschikking binnen categorie'}
+            - {property: 'faqFaqcat', label: 'Categorie'}
+            - {property: 'faqVraag', label: 'Vraag'}
+            - {property: 'faqAntwoord', type: 'text-editor', label: 'Antwoord'}
+            - {property: 'faqOrder', label: 'Rangschikking'}
+        show:
+          fields:
+            - {property: 'faqFaqcat', label: 'Categorie'}
+            - {property: 'faqVraag', label: 'Vraag'}
+            - {property: 'faqAntwoord', type: 'raw', label: 'Antwoord'}
+            - {property: 'faqOrder', label: 'Rangschikking'}
       Stage:
         class: App\Entity\Stage
         list:
-          fields: ['stageOrder', 'stageSubtitel', 'stageOmschrijving', 'updatedAt']
+          sort: ['stageOrder', 'ASC']
+          fields:
+            - {property: 'stageOrder', label: 'Rangschikking'}
+            - {property: 'stageSubtitel', label: 'Subtitel'}
+            - {property: 'stageOmschrijving', label: 'Omschrijving' , type: 'raw'}
+            - updatedAt
         form:
           fields:
-            - stageSubtitel
-            - {property: 'stageOmschrijving', type: 'text-editor'}
-            - {property: 'stageOrder', label: 'rangschikking op pagina'}
+            - {property: 'stageSubtitel', label: 'Subtitel'}
+            - {property: 'stageOmschrijving', label: 'Omschrijving' ,type: 'text-editor'}
+            - {property: 'stageOrder', label: 'Rangschikking'}
+        show:
+          fields:
+            - {property: 'stageSubtitel', label: 'Subtitel'}
+            - {property: 'stageOmschrijving', label: 'Omschrijving' , type: 'raw'}
+            - {property: 'stageOrder', label: 'Rangschikking'}
 
   #Machines--------------------------------------------------------------------------------------------------------------------
       MachineCategorie:
         class: App\Entity\MachineCategorie
         list:
-          fields: ['mcatImgPad', 'mcatNaam' ,'mcatOmschrijving']
+          fields:
+            - {property: 'mcatImgPad', label: 'Afbeelding'}
+            - {property: 'mcatNaam', label: 'Categorie'}
+            - {property: 'mcatOmschrijving', label: 'Categorie Omschrijving'}
         form:
           fields:
             - {property: 'mcatNaam', label: 'Categorie'}
@@ -141,70 +188,188 @@ easy_admin:
       Machine:
         class: App\Entity\Machine
         list:
-          fields: ['machMcat', 'machImgPad', 'machNaam', 'machOmschrijving' ]
+          fields:
+            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'machNaam', label: 'Naam'}
+            - {property: 'machOmschrijving', label: 'Omschrijving'}
         form:
           fields:
-            - {property: 'machMcat', label: 'Machine Categorie'}
-            - {property: 'machNaam', label: 'Machine Naam'}
-            - {property: 'machOmschrijving', label: 'Machine Omschrijving'}
+            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machNaam', label: 'Naam'}
+            - {property: 'machOmschrijving', label: 'Omschrijving'}
+            - {property: 'machMat', label: 'Mogelijke Materialen'}
             - {property: 'machImgPad', label: 'Afbeelding'}
+            - {property: 'machImgAlt', label: 'Afbeelding Omschrijving'}
+            - {property: 'machImgFile', type: 'vich_image', label: 'Afbeelding File'}
+            - {property: 'machineFiles', type: 'collection', label: 'voorbeeldfiles', type_options: {entry_type: 'App\Form\MfileFileType', by_reference: false }}
+        show:
+          fields:
+            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machNaam', label: 'Naam'}
+            - {property: 'machOmschrijving', label: 'Omschrijving'}
+            - {property: 'machMat', label: 'Mogelijke Materialen'}
+            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
             - {property: 'machImgAlt', label: 'Afbeelding Omschrijving'}
       MachineStaat:
         class: App\Entity\MachineStaat
         list:
-          fields: []
+          fields:
+            - {property: 'mstaatStatus', label: 'Status'}
+            - {property: 'mstaatMach', label: 'Machine'}
+            - {property: 'mstaatStart', label: 'Status Begin'}
+            - {property: 'mstaatStop', label: 'Status Eind'}
         form:
           fields:
-            - XX
+            - {property: 'mstaatStatus', label: 'Status'}
+            - {property: 'mstaatMach', label: 'Machine'}
+            - {property: 'mstaatStart', label: 'Status Begin'}
+            - {property: 'mstaatStop', label: 'Status Eind'}
       MachineLink:
         class: App\Entity\MachineLink
         list:
-          fields: []
+          fields:
+            - {property: 'mlinkMach', label: 'Machine'}
+            - {property: 'mlinkTitel', label: 'link omschrijving'}
+            - {property: 'mlinkPad', label: 'Url', type: 'url'}
         form:
           fields:
-            - XX
+            - {property: 'mlinkMach', label: 'Machine'}
+            - {property: 'mlinkTitel', label: 'link omschrijving'}
+            - {property: 'mlinkPad', label: 'Url', type: 'url'}
+
       MachineFile:
         class: App\Entity\MachineFile
         list:
-          fields: []
+          fields:
+            - {property: 'mfileMach', label: 'Machine'}
+            - {property: 'mfileTitel', label: 'File omschrijving'}
+            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '%uploads_machine_file_path%'}
         form:
           fields:
-            - XX
+            - {property: 'mfileMach', label: 'Machine'}
+            - {property: 'mfileTitel', label: 'File omschrijving'}
+            - {property: 'mfileFile', type: 'vich_file', label: 'File'}
 
   #Shop--------------------------------------------------------------------------------------------------------------------
       ShopCategorie:
         class: App\Entity\ShopCategorie
+        list:
+          sort: ['scatOrder', 'ASC']
+          fields:
+            - {property: 'scatOrder', label: 'Rangschikking'}
+            - {property: 'scatNaam', label: 'Categorie Naam'}
+        form:
+          fields:
+            - {property: 'scatOrder', label: 'Rangschikking'}
+            - {property: 'scatNaam', label: 'Categorie Naam'}
+            - {property: 'shopmaterialen', label: 'shop items'}
+
       Shopmateriaal:
         class: App\Entity\Shopmateriaal
+        list:
+          sort: ['smatOrder', 'ASC']
+          fields:
+            - {property: 'smatOrder', label: 'Rangschikking'}
+            - {property: 'smatScat', label: 'Categorie'}
+            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatInStock', label: 'In Stock'}
+            - {property: 'smatAfmeting', label: 'Afmetingen'}
+            - {property: 'smatPrijs', label: 'Prijs'}
+        form:
+          fields:
+            - {property: 'smatOrder', label: 'Rangschikking'}
+            - {property: 'smatScat', label: 'Categorie'}
+            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatInStock', label: 'In Stock'}
+            - {property: 'smatAfmeting', label: 'Afmetingen'}
+            - {property: 'smatPrijs', label: 'Prijs', type: 'money', type_options: { currency: 'EUR' }}
 
 #fabmoment==============================================================================================================================
       Fabmoment:
         class: App\Entity\Fabmoment
+        list:
+          sort: ['fabDatum']
+          fields:
+            - {property: 'fabIsPosted', label: 'Publiek'}
+            - {property: 'fabDatum', label: 'Datum'}
+            - {property: 'fabTitel', label: 'Titel'}
+            - {property: 'fabOmschrijving', label: 'Omschrijving'}
+        form:
+          fields:
+            - {property: 'fabIsPosted', label: 'Publiek'}
+            - {property: 'fabDatum', label: 'Datum'}
+            - {property: 'fabTitel', label: 'Titel'}
+            - {property: 'fabOmschrijving', label: 'Omschrijving'}
+            #TODO:-----
       FabImg:
         class: App\Entity\FabImg
+        list:
+          fields:
+            - {property: 'fabimgFab', label: 'Fabmoment'}
+            - {property: 'fabimgImgPad', label: 'Afbeelding'}
+            - {property: 'fabimgImgAlt', label: 'Afbeelding Omschrijving'}
+        form:
+          fields:
+            - {property: 'fabimgFab', label: 'Fabmoment'}
+            - {property: 'fabimgImgPad', label: 'Afbeelding'}
+            - {property: 'fabimgImgAlt', label: 'Afbeelding Omschrijving'}
       FabFile:
         class: App\Entity\FabFile
+        list:
+          fields:
+            - {property: 'fabfileFab', label: 'Fabmoment'}
+            - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
+            - {property: 'fabfilePad', label: 'File', type: 'file'}
+        form:
+          fields:
       Materiaal:
         class: App\Entity\Materiaal
-      FabMat:
-        class: App\Entity\FabMat
-      FabMach:
-        class: App\Entity\FabMach
+        list:
+          fields:
+            - {property: 'matNaam', label: 'Materiaal'}
+        form:
+          fields:
+            - {property: 'matNaam', label: 'Materiaal'}
 
 #Nieuws & Events==============================================================================================================================
   #Nieuws--------------------------------------------------------------------------------------------------------------------
       Nieuws:
         class: App\Entity\Nieuws
+        list:
+          fields:
+        form:
+          fields:
   #Nieuws--------------------------------------------------------------------------------------------------------------------
       Event:
         class: App\Entity\Event
+        list:
+          fields:
+        form:
+          fields:
       Inschrijving:
         class: App\Entity\Inschrijving
+        list:
+          fields:
+        form:
+          fields:
 
 #user==============================================================================================================================
       User:
         class: App\Entity\User
+        list:
+          fields:
+        form:
+          fields:
       MachineRecht:
         class: App\Entity\MachineRecht
+        list:
+          fields:
+        form:
+          fields:
       MachineLog:
         class: App\Entity\MachineLog
+        list:
+          fields:
+        form:
+          fields:

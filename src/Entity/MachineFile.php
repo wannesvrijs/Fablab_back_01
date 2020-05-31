@@ -5,7 +5,9 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MachineFileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
@@ -26,9 +28,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ORM\Entity(repositoryClass=MachineFileRepository::class)
+ * @Vich\Uploadable()
  */
 class MachineFile
 {
+
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -39,7 +45,7 @@ class MachineFile
 
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineFiles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"machinefile:read", "admin:write"})
      */
     private $mfileMach;
@@ -55,6 +61,28 @@ class MachineFile
      * @Groups({"machinecategorie:item:read", "machinefile:read", "admin:write"})
      */
     private $mfilePad;
+
+    /**
+     * @Vich\UploadableField(mapping="machine_file", fileNameProperty="mfilePad")
+     */
+    private $mfileFile;
+
+    /**
+     * @return mixed
+     */
+    public function getMfileFile()
+    {
+        return $this->mfileFile;
+    }
+
+    /**
+     * @param mixed $mfileFile
+     */
+    public function setMfileFile($mfileFile): void
+    {
+        $this->mfileFile = $mfileFile;
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -99,6 +127,6 @@ class MachineFile
 
     public function __toString()
     {
-        return $this->mfileTitel;
+        return 'file';
     }
 }

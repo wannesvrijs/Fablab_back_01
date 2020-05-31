@@ -45,10 +45,10 @@ class MachineStaat
     private $mstaatMach;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
-    private $mstaatNaam;
+    private $mstaatStatus;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -68,6 +68,8 @@ class MachineStaat
      */
     private $mstaatGoogleId;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,17 +87,6 @@ class MachineStaat
         return $this;
     }
 
-    public function getMstaatNaam(): ?int
-    {
-        return $this->mstaatNaam;
-    }
-
-    public function setMstaatNaam(int $mstaatNaam): self
-    {
-        $this->mstaatNaam = $mstaatNaam;
-
-        return $this;
-    }
 
     public function getMstaatStart(): ?\DateTimeInterface
     {
@@ -133,8 +124,22 @@ class MachineStaat
         return $this;
     }
 
+
+    public function getMstaatStatus(): ?string
+    {
+        return $this->mstaatStatus;
+    }
+
+    public function setMstaatStatus(string $mstaatStatus): self
+    {
+        $this->mstaatStatus = $mstaatStatus;
+
+        return $this;
+    }
+
     public function __toString()
     {
-        return $this->mstaatNaam;
+        return $this->mstaatStatus;
     }
+
 }

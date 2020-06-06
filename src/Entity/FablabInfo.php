@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -39,13 +40,13 @@ class FablabInfo
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"admin:write"})
+     * @Groups({"fablabinfo:read","admin:write"})
      */
     private $infoSubtitel;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"admin:write"})
+     * @Groups({"fablabinfo:read","admin:write"})
      */
     private $infoOmschrijving;
 

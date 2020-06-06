@@ -96,6 +96,7 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40)
      * @Assert\NotBlank(message="Vul je voornaam in")
      * @Assert\Length(
@@ -107,6 +108,7 @@ class User implements UserInterface
     private $useVn;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40)
      * @Assert\NotBlank(message="Vul je achternaam in")
      * @Assert\Length(
@@ -117,41 +119,49 @@ class User implements UserInterface
     private $useAn;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="date")
      */
     private $useGeboorte;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $useGemeente;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $usePostcode;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40)
      */
     private $useBeroep;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=120, nullable=true)
      */
     private $useSchool;
 
     /**
+     * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=120, nullable=true)
      */
     private $useRichting;
 
     /**
+     * @Groups({"user:read"})
      * @ORM\Column(type="boolean")
      */
     private $useIsActief;
 
     /**
+     * @Groups({"user:read"})
      * @ORM\Column(type="integer")
      */
     private $useFabworthy;
@@ -167,6 +177,7 @@ class User implements UserInterface
     private $useIsBlocked;
 
     /**
+     * @Groups({"user:write"})
      * @ORM\Column(type="boolean")
      */
     private $useIsDeleted;
@@ -177,7 +188,7 @@ class User implements UserInterface
     private $machineLogs;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineRecht::class, mappedBy="mrechtUse")
+     * @ORM\OneToMany(targetEntity=MachineRecht::class, mappedBy="mrechtUse", orphanRemoval=true)
      */
     private $machineRechten;
 
@@ -188,7 +199,7 @@ class User implements UserInterface
     private $fabmoments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insUse")
+     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insUse", orphanRemoval=true)
      * @Groups({"user:read"})
      */
     private $inschrijvingen;

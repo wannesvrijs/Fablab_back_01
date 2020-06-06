@@ -41,7 +41,7 @@ class Materiaal
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"materiaal:read","admin:write"})
+     * @Groups({"fabmoment:item:read","materiaal:read","admin:write"})
      */
     private $matNaam;
 

@@ -68,6 +68,12 @@ class Event
     private $eveImgAlt;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"event:read", "admin:write"})
+     */
+    private $eveMetInschrijvingen;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"event:read", "admin:write"})
      */
@@ -80,7 +86,7 @@ class Event
     private $eveStart;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $eveStop;
@@ -98,7 +104,7 @@ class Event
     private $eveGoogleId;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insEve")
+     * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insEve", orphanRemoval=true)
      * @Groups({"event:read"})
      */
     private $inschrijvings;
@@ -256,6 +262,18 @@ class Event
     public function __toString()
     {
         return $this->eveTitel;
+    }
+
+    public function getEveMetInschrijvingen(): ?bool
+    {
+        return $this->eveMetInschrijvingen;
+    }
+
+    public function setEveMetInschrijvingen(?bool $eveMetInschrijvingen): self
+    {
+        $this->eveMetInschrijvingen = $eveMetInschrijvingen;
+
+        return $this;
     }
 
 }

@@ -42,16 +42,19 @@ class FaqCategorie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"faqcategorie:read","admin:write"})
      */
     private $faqcatNaam;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"admin:write"})
      */
     private $faqcatOrder = 50;
 
     /**
      * @ORM\OneToMany(targetEntity=Faq::class, mappedBy="faqFaqcat")
+     * @Groups({"faqcategorie:read","admin:write"})
      */
     private $faqs;
 

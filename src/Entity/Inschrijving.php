@@ -14,13 +14,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     attributes={"security"="is_granted('ROLE_USER')"},
  *     itemOperations={
- *          "get",
+ *          "get"={"security"="is_granted('EDIT', object)"},
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
- *          "delete"={"security"="is_granted('ROLE_USER')"}
+ *          "delete"={"security"="is_granted('EDIT', object)"}
  *     },
  *     collectionOperations={
  *          "get"= {},
- *          "post"={"security"="is_granted('ROLE_USER')"}
+ *          "post"={}
  *     },
  *     attributes={
  *          "pagination_items_per_page"=10,

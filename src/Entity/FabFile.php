@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabFileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //     TODO:
 
@@ -42,11 +43,13 @@ class FabFile
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabfileOmschrijving;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabfilePad;
 

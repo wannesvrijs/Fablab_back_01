@@ -9,12 +9,16 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //     TODO:
 
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *      },
  *     itemOperations={
  *          "get"={},
  *          "put"={"security"="is_granted('EDIT', object)",
@@ -49,47 +53,56 @@ class Fabmoment
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"fabmoment:read"})
      */
     private $fabTitel;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"fabmoment:read"})
      */
     private $fabOmschrijving;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"fabmoment:read"})
      */
     private $fabDatum;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"fabmoment:read"})
      */
     private $fabIsPosted;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Gedmo\Slug(fields={"fabTitel"})
+     * @Groups({"fabmoment:read"})
      */
     private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity=FabImg::class, mappedBy="fabimgFab")
+     * @Groups({"fabmoment:read"})
      */
     private $fabImgs;
 
     /**
      * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab")
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabMaches;
 
     /**
      * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab")
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabMats;
 
     /**
      * @ORM\OneToMany(targetEntity=FabFile::class, mappedBy="fabfileFab")
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabFiles;
 

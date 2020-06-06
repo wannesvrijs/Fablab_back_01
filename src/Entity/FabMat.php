@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabMatRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //     TODO:
 /**
@@ -45,6 +46,7 @@ class FabMat
     /**
      * @ORM\ManyToOne(targetEntity=Materiaal::class, inversedBy="fabMats")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"fabmoment:item:read"})
      */
     private $fabmatMat;
 

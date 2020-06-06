@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabMachRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //     TODO:
 /**
@@ -36,6 +37,7 @@ class FabMach
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="fabMaches")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"fabmoment:read"})
      */
     private $fabmachMach;
 

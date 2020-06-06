@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabImgRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //     TODO:
 /**
@@ -30,6 +31,7 @@ class FabImg
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"fabmoment:read"})
      */
     private $id;
 
@@ -41,11 +43,13 @@ class FabImg
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"fabmoment:read"})
      */
     private $fabimgImgPad;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"fabmoment:read"})
      */
     private $fabimgImgAlt;
 

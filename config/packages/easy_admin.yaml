@@ -289,7 +289,7 @@ easy_admin:
       Fabmoment:
         class: App\Entity\Fabmoment
         list:
-          sort: ['fabDatum']
+          sort: 'fabDatum'
           fields:
             - {property: 'fabIsPosted', label: 'Publiek'}
             - {property: 'fabDatum', label: 'Datum'}
@@ -323,6 +323,9 @@ easy_admin:
             - {property: 'fabfilePad', label: 'File', type: 'file'}
         form:
           fields:
+            - {property: 'fabfileFab', label: 'Fabmoment'}
+            - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
+            - {property: 'fabfilePad', label: 'File', type: 'file'}
       Materiaal:
         class: App\Entity\Materiaal
         list:
@@ -336,40 +339,40 @@ easy_admin:
   #Nieuws--------------------------------------------------------------------------------------------------------------------
       Nieuws:
         class: App\Entity\Nieuws
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:
   #Nieuws--------------------------------------------------------------------------------------------------------------------
       Event:
         class: App\Entity\Event
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:
       Inschrijving:
         class: App\Entity\Inschrijving
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:
 
 #user==============================================================================================================================
       User:
         class: App\Entity\User
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:
       MachineRecht:
         class: App\Entity\MachineRecht
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:
       MachineLog:
         class: App\Entity\MachineLog
-        list:
-          fields:
-        form:
-          fields:
+#        list:
+#          fields:
+#        form:
+#          fields:

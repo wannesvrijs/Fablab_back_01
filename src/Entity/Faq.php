@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     itemOperations={
+ *          "get",
  *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
@@ -43,22 +44,25 @@ class Faq
 
     /**
      * @ORM\ManyToOne(targetEntity=FaqCategorie::class, inversedBy="faqs")
+     * @Groups({"faq:read","admin:write"})
      */
     private $faqFaqcat;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"faq:read","admin:write"})
+     * @Groups({"faqcategorie:read","faq:read","admin:write"})
      */
     private $faqVraag;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"faqcategorie:read","faq:read","admin:write"})
      */
     private $faqAntwoord;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"admin:write"})
      */
     private $faqOrder = 50;
 

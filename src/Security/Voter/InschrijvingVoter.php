@@ -22,7 +22,7 @@ class InschrijvingVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['READ'])
+        return in_array($attribute, ['EDIT'])
             && $subject instanceof Inschrijving;
     }
 
@@ -40,7 +40,7 @@ class InschrijvingVoter extends Voter
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case 'READ':
+            case 'EDIT':
                 if($subject->getInsUse() === $user) {
                     return true;
                 }

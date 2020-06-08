@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Fabmoment;
-use App\Repository\FabmomentRepository;
+use App\Repository\UserRepository;
 use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,9 +13,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 class CustomApiController extends AbstractController
 {
     /**
-     * @Route("/api/viewPublishedPost", name="custom_api", methods={"GET"})
+     * @Route("/api/emailIsTaken", name="custom_api", methods={"GET"})
      */
-    public function getPosts( FabmomentRepository $fabmomentRepository, SerializerInterface $serializer, NormalizerInterface $normalizer)
+    public function getPosts( UserRepository $userRepository, SerializerInterface $serializer, NormalizerInterface $normalizer)
     {
         $fabmoments = $fabmomentRepository->findFabmomentCollection();
 

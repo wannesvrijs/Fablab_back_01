@@ -36,6 +36,7 @@ class UserDataPersister implements DataPersisterInterface
             );
             $data->eraseCredentials();
         }
+        $data->setUseRegkey(bin2hex(random_bytes(34)));
         $this->entityManager->persist($data);
         $this->entityManager->flush();
     }

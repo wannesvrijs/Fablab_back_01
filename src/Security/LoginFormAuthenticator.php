@@ -50,7 +50,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function supports(Request $request)
     {
         // do your work when we're POSTing to the login page
-        return $request->attributes->get('_route') === 'app_login'
+        return $request->attributes->get('_route') === 'app_admin_login'
             && $request->isMethod('POST');
     }
 
@@ -59,7 +59,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('_csrf_token'),
         ];
 
         //store the requested username in the session (so you can autofill it again)
@@ -73,12 +72,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-
-        if (!$this->csrfTokenManager->isTokenValid($token)){
-            throw new InvalidCsrfTokenException();
-        }
-
         return $this->userRepository->findOneBy(['email' => $credentials['email']]);
     }
 
@@ -94,13 +87,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetpath);
         }
 
-        return new RedirectResponse($this->router->generate('app_homepage'));
+        return new RedirectResponse('/admin');
 
     }
 
     protected function getLoginUrl()
     {
-        return $this->router->generate('app_login');
+        return $this->router->generate('app_admin_login');
     }
 
 }

@@ -49,6 +49,12 @@ easy_admin:
                     - {entity: MachineRecht, label: "Machinerechten", icon: "thumbs-up"}
                     - {entity: MachineLog, label: "Machine-logs", icon: "stopwatch"}
 
+            - {label: "TEST"}
+            - label: "TEST"
+              children:
+                    - {entity: Book, label: "test", icon: "user-astronaut"}
+
+
 
 #GLOBAL==============================================================================================================================
 #==============================================================================================================================
@@ -376,3 +382,10 @@ easy_admin:
 #          fields:
 #        form:
 #          fields:
+
+
+      Book:
+        class: App\Entity\Book
+        list:
+          fields:
+            - {property: 'image', type: 'image', label: 'Afbeelding', base_path: 'media'}

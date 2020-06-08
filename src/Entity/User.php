@@ -37,7 +37,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ApiFilter(PropertyFilter::class)
- * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -52,19 +51,10 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Land::class, inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank(message="Vul een land in")
-     */
-    private $useLand;
-
-    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:read", "user:write"})
      * @Assert\NotBlank(message="Vul een geldig Emailadres in")
      * @Assert\Email(message="Vul een geldig Emailadres in")
-     * @Assert\Unique(message="dit Emailadres is reeds in gebruik")
      */
     private $email;
 
@@ -88,10 +78,6 @@ class User implements UserInterface
      *     min="8",
      *     minMessage="je wachtwoord moet minimaal 8 tekens bevatten"
      * )
-     * @Assert\Regex (
-     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
-     *      message="gebruik minimaal 1 hoofdletter, 1 kleine letter, and 1 nummer"
-     * )
      */
     private $plainPassword;
 
@@ -112,7 +98,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=40)
      * @Assert\NotBlank(message="Vul je achternaam in")
      * @Assert\Length(
-     *     min="8",
+     *     min="2",
      *     minMessage="je achternaam moet minimaal 2 tekens bevatten"
      * )
      */
@@ -123,6 +109,14 @@ class User implements UserInterface
      * @ORM\Column(type="date")
      */
     private $useGeboorte;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     * @Groups({"user:read", "user:write"})
+     * @Assert\NotBlank(message="Vul een land in")
+     */
+    private $useLand;
+
 
     /**
      * @Groups({"user:write", "user:read"})
@@ -158,13 +152,13 @@ class User implements UserInterface
      * @Groups({"user:read"})
      * @ORM\Column(type="boolean")
      */
-    private $useIsActief;
+    private $useIsActief = true;
 
     /**
      * @Groups({"user:read"})
      * @ORM\Column(type="integer")
      */
-    private $useFabworthy;
+    private $useFabworthy = 3;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -174,13 +168,13 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $useIsBlocked;
+    private $useIsBlocked = false;
 
     /**
      * @Groups({"user:write"})
      * @ORM\Column(type="boolean")
      */
-    private $useIsDeleted;
+    private $useIsDeleted = false;
 
     /**
      * @ORM\OneToMany(targetEntity=MachineLog::class, mappedBy="mlogUse")
@@ -324,6 +318,18 @@ class User implements UserInterface
     public function setUseAn(string $useAn): self
     {
         $this->useAn = $useAn;
+
+        return $this;
+    }
+
+    public function getUseLand(): ?string
+    {
+        return $this->useLand;
+    }
+
+    public function setUseLand(string $useLand): self
+    {
+        $this->useLand = $useLand;
 
         return $this;
     }
@@ -550,18 +556,6 @@ class User implements UserInterface
                 $fabmoment->setFabUse(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUseLand(): ?Land
-    {
-        return $this->useLand;
-    }
-
-    public function setUseLand(?Land $useLand): self
-    {
-        $this->useLand = $useLand;
 
         return $this;
     }

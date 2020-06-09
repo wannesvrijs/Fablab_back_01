@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabmomentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 //     TODO:
 
@@ -33,6 +36,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
+ * @ApiFilter(BooleanFilter::class, properties={"fabIsPosted"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "fabTitel": "partial",
+ *     "fabOmschrijving": "partial",
+ *     "fabMats": "partial",
+ * })
  * @ORM\Entity(repositoryClass=FabmomentRepository::class)
  */
 class Fabmoment

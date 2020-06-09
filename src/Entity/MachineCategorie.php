@@ -7,6 +7,7 @@ use App\Repository\MachineCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -68,6 +69,13 @@ class MachineCategorie
      * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $machines;
+
+    /**
+     * @Gedmo\Slug(fields={"mcatNaam"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"machinecategorie:read", "admin:write"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -161,5 +169,17 @@ class MachineCategorie
     public function __toString()
     {
         return $this->mcatNaam;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

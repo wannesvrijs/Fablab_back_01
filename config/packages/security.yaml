@@ -32,6 +32,7 @@ security:
 #                authenticators:
 #                    - lexik_jwt_authentication.jwt_token_authenticator
 
+
         default:
             anonymous: lazy
             guard:
@@ -47,6 +48,7 @@ security:
 
         main:
             anonymous: true
+
 
 
     access_control:

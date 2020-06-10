@@ -25,16 +25,18 @@ security:
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
-#        api:
-#            pattern: ^/api/
-#            stateless: true
-#            guard:
-#                authenticators:
-#                    - lexik_jwt_authentication.jwt_token_authenticator
+        api:
+            pattern: ^/api/
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
 
-        default:
-            anonymous: lazy
+        main:
+            pattern: ^/
+            anonymous: true
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
@@ -45,10 +47,6 @@ security:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
-
-        main:
-            anonymous: true
-
 
 
     access_control:

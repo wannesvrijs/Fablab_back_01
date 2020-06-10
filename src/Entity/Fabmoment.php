@@ -40,7 +40,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ApiFilter(SearchFilter::class, properties={
  *     "fabTitel": "partial",
  *     "fabOmschrijving": "partial",
- *     "fabMats": "partial",
+ *     "fabMats.fabmatMat.matNaam": "exact",
+ *     "fabMaches.fabmachMach.machMcat.mcatNaam": "exact",
  * })
  * @ORM\Entity(repositoryClass=FabmomentRepository::class)
  */
@@ -99,7 +100,7 @@ class Fabmoment
 
     /**
      * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab")
-     * @Groups({"fabmoment:item:read"})
+     * @Groups({"fabmoment:read"})
      */
     private $fabMaches;
 

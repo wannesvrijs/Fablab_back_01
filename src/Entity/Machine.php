@@ -49,7 +49,7 @@ class Machine
     /**
      * @ORM\ManyToOne(targetEntity=MachineCategorie::class, inversedBy="machines")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"machine:read","admin:write"})
+     * @Groups({"machine:read","admin:write", "fabmoment:read"})
      */
     private $machMcat;
 

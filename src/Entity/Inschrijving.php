@@ -28,6 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ORM\Entity(repositoryClass=InschrijvingRepository::class)
+ * @ORM\EntityListeners({"App\Doctrine\InschrijvingSetUserListener"})
  */
 class Inschrijving
 {

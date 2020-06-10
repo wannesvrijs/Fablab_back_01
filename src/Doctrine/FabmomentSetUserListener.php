@@ -21,6 +21,9 @@ class FabmomentSetUserListener
     //function to be executed before persisting to the database
     public function prePersist(Fabmoment $fabmoment)
     {
+        if ($fabmoment->getFabUse()){
+            return;
+        }
         if ($this->security->getUser()){
             $fabmoment->setFabUse($this->security->getUser());
         }

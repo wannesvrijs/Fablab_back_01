@@ -12,15 +12,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_User')"},
+ *          "put"={"security"="is_granted('ROLE_USER')"},
  *          "delete"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     collectionOperations={
  *          "get"= {},
  *          "post"={"security"="is_granted('ROLE_USER')"}
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
  *     attributes={
  *          "pagination_items_per_page"=10,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
@@ -46,7 +44,7 @@ class FabMat
     /**
      * @ORM\ManyToOne(targetEntity=Materiaal::class, inversedBy="fabMats")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"fabmoment:item:read"})
+     * @Groups({"fabmoment:item:read", "fabmoment:write"})
      */
     private $fabmatMat;
 

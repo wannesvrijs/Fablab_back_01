@@ -20,8 +20,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get",
  *          "post"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
  *     attributes={
  *          "pagination_items_per_page"=10,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}

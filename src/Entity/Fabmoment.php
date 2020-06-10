@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabmomentRepository;
+use App\Validator\IsValidOwner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,8 +30,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "delete"={"security"="is_granted('EDIT', object)",
  *              "security_message"="Only the creator or admin can edit a FabMoment"},
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
  *     attributes={
  *          "pagination_items_per_page"=12,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
@@ -44,6 +43,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     "fabMaches.fabmachMach.machMcat.mcatNaam": "exact",
  * })
  * @ORM\Entity(repositoryClass=FabmomentRepository::class)
+ * @ORM\EntityListeners({"App\Doctrine\FabmomentSetUserListener"})
  */
 class Fabmoment
 {
@@ -58,24 +58,25 @@ class Fabmoment
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="fabmoments")
+     * @IsValidOwner()
      */
     private $fabUse;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"fabmoment:read"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabTitel;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"fabmoment:read"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabOmschrijving;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"fabmoment:read"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabDatum;
 
@@ -83,7 +84,7 @@ class Fabmoment
      * @ORM\Column(type="boolean")
      * @Groups({"fabmoment:read"})
      */
-    private $fabIsPosted;
+    private $fabIsPosted = false;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -99,14 +100,14 @@ class Fabmoment
     private $fabImgs;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab")
-     * @Groups({"fabmoment:read"})
+     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab", cascade={"persist"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabMaches;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab")
-     * @Groups({"fabmoment:item:read"})
+     * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab", cascade={"persist"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabMats;
 

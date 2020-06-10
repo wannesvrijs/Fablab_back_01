@@ -16,8 +16,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "put",
  *          "delete"
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
  *     attributes={
  *          "pagination_items_per_page"=10,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
@@ -37,7 +35,7 @@ class FabMach
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="fabMaches")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"fabmoment:read"})
+     * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabmachMach;
 

@@ -1,4 +1,6 @@
 api_platform:
+    eager_loading:
+        max_joins: 100
     swagger:
         api_keys:
             apiKey:

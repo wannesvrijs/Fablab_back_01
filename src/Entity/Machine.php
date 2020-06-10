@@ -23,9 +23,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *          "get",
  *          "post"={"security"="is_granted('ROLE_ADMIN')"}
  *     },
- *     normalizationContext={},
- *     denormalizationContext={},
  *     attributes={
+ *          "force_eager"=false,
  *          "pagination_items_per_page"=10,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
@@ -78,7 +77,7 @@ class Machine
     private $machFiles;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"machinecategorie:item:read", "machine:read","admin:write"})
      */
     private $machMat;
@@ -119,7 +118,7 @@ class Machine
 
     /**
      * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMach")
-     * @Groups({"machinecategorie:item:read", "machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
      */
     private $fabMaches;
 

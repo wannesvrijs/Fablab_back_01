@@ -44,11 +44,11 @@ services:
         # implications!
         decoration_priority: -20
 
+    App\Doctrine\FabmomentSetUserListener:
+        tags: ['doctrine.orm.entity_listener']
+
     App\Doctrine\CheeslistingSetOwnerListener:
         tags: ['doctrine.orm.entity_listener']
 
     App\Doctrine\InschrijvingSetUserListener:
-        tags: ['doctrine.orm.entity_listener']
-
-    App\Doctrine\FabmomentSetUserListener:
         tags: ['doctrine.orm.entity_listener']

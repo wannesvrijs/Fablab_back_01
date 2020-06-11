@@ -41,6 +41,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     "fabOmschrijving": "partial",
  *     "fabMats.fabmatMat.matNaam": "exact",
  *     "fabMaches.fabmachMach.machMcat.mcatNaam": "exact",
+ *     "fabUse.id": "exact",
  * })
  * @ORM\Entity(repositoryClass=FabmomentRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\FabmomentSetUserListener"})

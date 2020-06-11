@@ -42,7 +42,7 @@ class MachineCategorie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machinecategorie:read", "admin:write", "fabmoment:read"})
+     * @Groups({"machinecategorie:read", "admin:write", "fabmoment:read", "machine:read"})
      */
     private $mcatNaam;
 

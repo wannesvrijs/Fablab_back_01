@@ -48,7 +48,7 @@ class Machine
     /**
      * @ORM\ManyToOne(targetEntity=MachineCategorie::class, inversedBy="machines")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"machine:read","admin:write", "fabmoment:read"})
+     * @Groups({"admin:write", "fabmoment:read", "machine:read"})
      */
     private $machMcat;
 
@@ -60,49 +60,49 @@ class Machine
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machOmschrijving;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machAfmeting;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machFiles;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read", "machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machMat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read", "machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machImgPad;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machImgAlt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machVideoPad;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machVideoTitle;
 
@@ -118,7 +118,7 @@ class Machine
 
     /**
      * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMach")
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $fabMaches;
 
@@ -130,13 +130,13 @@ class Machine
 
     /**
      * @ORM\OneToMany(targetEntity=MachineLink::class, mappedBy="mlinkMach")
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machineLinks;
 
     /**
      * @ORM\OneToMany(targetEntity=MachineFile::class, mappedBy="mfileMach", cascade={"persist"})
-     * @Groups({"machinecategorie:item:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machineFiles;
 
@@ -389,7 +389,7 @@ class Machine
     }
 
     /**
-     * @Groups({"machinecategorie:read", "machine:read"})
+     * @Groups({"machinecategorie:read"})
      * @SerializedName("machineStaten")
      */
     public function getMachineStatenUpcomming()

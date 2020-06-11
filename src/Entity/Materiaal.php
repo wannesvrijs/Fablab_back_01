@@ -45,7 +45,6 @@ class Materiaal
 
     /**
      * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatMat")
-     * @Groups({"materiaal:read"})
      */
     private $fabMats;
 

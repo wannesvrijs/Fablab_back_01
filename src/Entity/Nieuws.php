@@ -51,11 +51,6 @@ class Nieuws
      */
     private $nwsOmschrijving;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:write","nieuws:read"})
-     */
-    private $nwsImgPad;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -100,18 +95,6 @@ class Nieuws
     public function setNwsOmschrijving(string $nwsOmschrijving): self
     {
         $this->nwsOmschrijving = $nwsOmschrijving;
-
-        return $this;
-    }
-
-    public function getNwsImgPad(): ?string
-    {
-        return $this->nwsImgPad;
-    }
-
-    public function setNwsImgPad(?string $nwsImgPad): self
-    {
-        $this->nwsImgPad = $nwsImgPad;
 
         return $this;
     }

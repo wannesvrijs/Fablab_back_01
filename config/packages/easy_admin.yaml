@@ -403,14 +403,12 @@ easy_admin:
             - {property: 'nwsOmschrijving', label: 'Omschrijving'}
             - {property: 'nwsStart', label: 'Aanvang', type_options: {widget: single_text}}
             - {property: 'nwsStop', label: 'Einde', type_options: {widget: single_text}}
-#            - {property: 'nwsImgFile', type: 'vich_image', label: 'Afbeelding File'}
         show:
           fields:
             - {property: 'nwsTitel', label: 'Titel'}
             - {property: 'nwsOmschrijving', label: 'Omschrijving'}
             - {property: 'nwsStart', label: 'Aanvang'}
             - {property: 'nwsStop', label: 'Einde'}
-#            - {property: 'nwsImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
 
       #EVENTS--------------------------------------------------------------------------------------------------------------------
 #      TODO: make dates nullable

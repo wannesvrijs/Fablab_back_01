@@ -8,7 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(
@@ -28,10 +30,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
+ * @Vich\Uploadable()
  * @ORM\Entity(repositoryClass=MachineCategorieRepository::class)
  */
 class MachineCategorie
 {
+
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,7 +53,7 @@ class MachineCategorie
     private $mcatNaam;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $mcatOmschrijving;
@@ -58,11 +64,6 @@ class MachineCategorie
      */
     private $mcatImgPad;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:read", "admin:write"})
-     */
-    private $mcatImgAlt;
 
     /**
      * @ORM\OneToMany(targetEntity=Machine::class, mappedBy="machMcat")
@@ -76,6 +77,26 @@ class MachineCategorie
      * @Groups({"machinecategorie:read", "admin:write"})
      */
     private $slug;
+
+    /**
+     * @Vich\UploadableField(mapping="machine_img", fileNameProperty="mcatImgPad")
+     */
+    private $mcatImgFile;
+
+    /**
+     * @return mixed
+     */
+    public function getMcatImgFile()
+    {
+        return $this->mcatImgFile;
+    }
+
+
+    public function setMcatImgFile($mcatImgFile): void
+    {
+        $this->mcatImgFile = $mcatImgFile;
+        $this->updatedAt = new \DateTime();
+    }
 
     public function __construct()
     {
@@ -119,18 +140,6 @@ class MachineCategorie
     public function setMcatImgPad(?string $mcatImgPad): self
     {
         $this->mcatImgPad = $mcatImgPad;
-
-        return $this;
-    }
-
-    public function getMcatImgAlt(): ?string
-    {
-        return $this->mcatImgAlt;
-    }
-
-    public function setMcatImgAlt(?string $mcatImgAlt): self
-    {
-        $this->mcatImgAlt = $mcatImgAlt;
 
         return $this;
     }

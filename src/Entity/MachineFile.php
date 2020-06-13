@@ -45,7 +45,7 @@ class MachineFile
 
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineFiles")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      * @Groups({"machinefile:read", "admin:write"})
      */
     private $mfileMach;
@@ -113,12 +113,13 @@ class MachineFile
         return $this;
     }
 
+
     public function getMfilePad(): ?string
     {
         return $this->mfilePad;
     }
 
-    public function setMfilePad(string $mfilePad): self
+    public function setMfilePad(?string $mfilePad)
     {
         $this->mfilePad = $mfilePad;
 

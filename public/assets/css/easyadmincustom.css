@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+* {
+    font-family: "IBM Plex Sans", Geneva, Arial, sans-serif;
+}
+
+
+body {
+    background-color: transparent;
+    background-size: 6px 6px;
+    background-image: linear-gradient(
+            to right,
+            rgb(237, 237, 237) 0.5px,
+            transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(231, 231, 231) 0.5px, transparent 1px);
+}
+
+.trix-button-group--file-tools,
+.trix-button--icon-code,
+.trix-button--icon-heading-1,
+.trix-button--icon-strike,
+.trix-button--icon-quote
+{
+    display: none !important;
+}
+
+.field-easyadmin_text_editor > .form-widget {
+    flex: 0 0 0%;
+}
+
+.main-sidebar {
+    background: none;
+}
+
+.content-header {
+}
+.content-footer {
+    border-top: 1px solid #E3E3E3;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+.datagrid thead, .badge-secondary {
+    background-color:  #f3f4f4;
+}
+.datagrid thead .sorted i {
+    color: #0f5ad3;
+
+}
+
+body.show .form-horizontal, .content-body form  {
+    background:  #f3f4f4!important;
+}
+
+.user-name, .btn-link {
+    color: #0f5ad3;
+}
+.logo-long {
+    font-weight: 400;
+    color: black !important;
+}
+
+li:not(.submenu-active).active .fa,
+.sidebar-menu li:not(.submenu-active).active a{
+    color: #0f5ad3 !important;
+}
+
+.treeview.menu-open .treeview-icon {
+    color: #00c487;
+    filter: opacity(100%);
+}
+
+.checkbox-switch input:checked+span:before {
+    background: #00c487;
+}
+
+.checkbox-switch input:not(checked)+span:before {
+    background: #f9684b;
+}
+
+.content {
+    border-radius: 0;
+    box-shadow: none;
+    border: 2px solid #E3E3E3;
+}
+.btn-primary {
+    background-color: #0f5ad3 !important;
+}
+.btn {
+    box-shadow: none;
+}
+.form-control.is-invalid {
+    border-color:#f9684b !important ;
+}
+
+.text-danger, .invalid-feedback {
+    color: #f9684b !important;
+}
+.btn.btn-danger, .badge-danger {
+    background-color: #f9684b !important;
+}
+.modal-content {
+    border-radius: 0;
+    background-color: #f3f4f4;
+}
+
+a {
+    color: #0f5ad3;
+}
+
+.sidebar-menu .fa {
+    filter: opacity(100%);
+    color: #00c487;
+}
+
+.content-wrapper {
+    padding-top: 20px;
+}

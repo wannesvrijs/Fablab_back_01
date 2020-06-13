@@ -62,7 +62,7 @@ class Shopmateriaal
     private $smatAfmeting;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="float", length=10)
      * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatPrijs;

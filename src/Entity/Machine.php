@@ -71,7 +71,7 @@ class Machine
     private $machAfmeting;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machFiles;
@@ -87,12 +87,6 @@ class Machine
      * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machImgPad;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"machinecategorie:item:read","admin:write"})
-     */
-    private $machImgAlt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -117,25 +111,25 @@ class Machine
     private $machineRechten;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMach")
+     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMach", orphanRemoval=true)
      * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $fabMaches;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineStaat::class, mappedBy="mstaatMach")
+     * @ORM\OneToMany(targetEntity=MachineStaat::class, mappedBy="mstaatMach", orphanRemoval=true)
      * @Groups({"admin:write"})
      */
     private $machineStaten;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineLink::class, mappedBy="mlinkMach")
+     * @ORM\OneToMany(targetEntity=MachineLink::class, mappedBy="mlinkMach", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machineLinks;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineFile::class, mappedBy="mfileMach", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=MachineFile::class, mappedBy="mfileMach", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"machinecategorie:item:read","admin:write"})
      */
     private $machineFiles;
@@ -247,18 +241,6 @@ class Machine
     public function setMachImgPad(?string $machImgPad): self
     {
         $this->machImgPad = $machImgPad;
-
-        return $this;
-    }
-
-    public function getMachImgAlt(): ?string
-    {
-        return $this->machImgAlt;
-    }
-
-    public function setMachImgAlt(?string $machImgAlt): self
-    {
-        $this->machImgAlt = $machImgAlt;
 
         return $this;
     }

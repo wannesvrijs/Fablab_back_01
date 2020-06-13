@@ -58,12 +58,6 @@ class Nieuws
     private $nwsImgPad;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:write","nieuws:read"})
-     */
-    private $nwsImgAlt;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"admin:write","nieuws:read"})
      */
@@ -122,17 +116,6 @@ class Nieuws
         return $this;
     }
 
-    public function getNwsImgAlt(): ?string
-    {
-        return $this->nwsImgAlt;
-    }
-
-    public function setNwsImgAlt(?string $nwsImgAlt): self
-    {
-        $this->nwsImgAlt = $nwsImgAlt;
-
-        return $this;
-    }
 
     public function getNwsStart(): ?\DateTimeInterface
     {

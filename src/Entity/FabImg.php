@@ -47,11 +47,6 @@ class FabImg
      */
     private $fabimgImgPad;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"fabmoment:read"})
-     */
-    private $fabimgImgAlt;
 
     public function getId(): ?int
     {
@@ -82,17 +77,6 @@ class FabImg
         return $this;
     }
 
-    public function getFabimgImgAlt(): ?string
-    {
-        return $this->fabimgImgAlt;
-    }
-
-    public function setFabimgImgAlt(?string $fabimgImgAlt): self
-    {
-        $this->fabimgImgAlt = $fabimgImgAlt;
-
-        return $this;
-    }
 
     public function __toString()
     {

@@ -62,12 +62,6 @@ class Event
     private $eveImgPad;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event:read", "admin:write"})
-     */
-    private $eveImgAlt;
-
-    /**
      * @ORM\Column(type="boolean")
      * @Groups({"event:read", "admin:write"})
      */
@@ -92,7 +86,7 @@ class Event
     private $eveStop;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", length=10, nullable=true)
      * @Groups({"event:read", "inschrijving:read", "admin:write"})
      */
     private $evePrijs;
@@ -156,17 +150,6 @@ class Event
         return $this;
     }
 
-    public function getEveImgAlt(): ?string
-    {
-        return $this->eveImgAlt;
-    }
-
-    public function setEveImgAlt(?string $eveImgAlt): self
-    {
-        $this->eveImgAlt = $eveImgAlt;
-
-        return $this;
-    }
 
     public function getEveMaxPers(): ?int
     {

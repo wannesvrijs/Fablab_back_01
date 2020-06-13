@@ -95,25 +95,25 @@ class Fabmoment
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabImg::class, mappedBy="fabimgFab")
+     * @ORM\OneToMany(targetEntity=FabImg::class, mappedBy="fabimgFab",cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read"})
      */
     private $fabImgs;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabMaches;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabMats;
 
     /**
-     * @ORM\OneToMany(targetEntity=FabFile::class, mappedBy="fabfileFab")
+     * @ORM\OneToMany(targetEntity=FabFile::class, mappedBy="fabfileFab", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:item:read"})
      */
     private $fabFiles;

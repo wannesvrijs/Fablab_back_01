@@ -1,5 +1,9 @@
 easy_admin:
     design:
+        assets:
+            css:
+              - assets/css/easyadmincustom.css
+
         menu:
 
             - {label: "Info"}
@@ -50,9 +54,6 @@ easy_admin:
                     - {entity: MachineLog, label: "Machine-logs", icon: "stopwatch"}
 
             - {label: "TEST"}
-            - label: "TEST"
-              children:
-                    - {entity: Book, label: "test", icon: "user-astronaut"}
 
 
 
@@ -62,7 +63,7 @@ easy_admin:
 
     site_name: 'FabLab Dashboard'
     user:
-        display_avatar: false
+        display_avatar: true
         name_property_path: 'useVn'
 
     formats:
@@ -110,17 +111,17 @@ easy_admin:
           fields:
             - {property: 'regOrder', label: 'Rangschikking'}
             - {property: 'regNaam', label: 'Regel'}
-            - {property: 'regOmschrijving', type: 'raw', label: 'Omschrijving'}
+            - {property: 'regOmschrijving', label: 'Omschrijving'}
             - updatedAt
         form:
           fields:
             - {property: 'regNaam', label: 'Regel'}
-            - {property: 'regOmschrijving', type: 'text-editor', label: 'Omschrijving'}
+            - {property: 'regOmschrijving', label: 'Omschrijving'}
             - {property: 'regOrder', label: 'Rangschikking'}
         show:
           fields:
             - {property: 'regNaam', label: 'Regel'}
-            - {property: 'regOmschrijving', type: 'raw', label: 'Omschrijving'}
+            - {property: 'regOmschrijving', label: 'Omschrijving'}
             - {property: 'regOrder', label: 'Rangschikking'}
       FaqCategorie:
         class: App\Entity\FaqCategorie
@@ -181,16 +182,21 @@ easy_admin:
         class: App\Entity\MachineCategorie
         list:
           fields:
-            - {property: 'mcatImgPad', label: 'Afbeelding'}
             - {property: 'mcatNaam', label: 'Categorie'}
-            - {property: 'mcatOmschrijving', label: 'Categorie Omschrijving'}
+            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'mcatOmschrijving', label: 'Omschrijving'}
         form:
           fields:
             - {property: 'mcatNaam', label: 'Categorie'}
-            - {property: 'mcatOmschrijving', label: 'Categorie Omschrijving'}
-            - {property: 'mcatImgPad', label: 'Afbeelding'}
-            - {property: 'mcatImgAlt', label: 'Afbeelding Omschrijving'}
+            - {property: 'mcatOmschrijving', label: 'Omschrijving'}
             - {property: 'machines', label: 'Machines'}
+            - {property: 'mcatImgFile', type: 'vich_image', label: 'Afbeelding File'}
+        show:
+          fields:
+            - {property: 'mcatNaam', label: 'Categorie'}
+            - {property: 'mcatOmschrijving', label: 'Omschrijving'}
+            - {property: 'machines', label: 'Machines'}
+            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
       Machine:
         class: App\Entity\Machine
         list:
@@ -205,9 +211,8 @@ easy_admin:
             - {property: 'machNaam', label: 'Naam'}
             - {property: 'machOmschrijving', label: 'Omschrijving'}
             - {property: 'machMat', label: 'Mogelijke Materialen'}
-            - {property: 'machImgPad', label: 'Afbeelding'}
-            - {property: 'machImgAlt', label: 'Afbeelding Omschrijving'}
             - {property: 'machImgFile', type: 'vich_image', label: 'Afbeelding File'}
+            - {property: 'machineLinks', type: 'collection', label: 'Links', type_options: {entry_type: 'App\Form\MlinkLinkType', by_reference: false }}
             - {property: 'machineFiles', type: 'collection', label: 'voorbeeldfiles', type_options: {entry_type: 'App\Form\MfileFileType', by_reference: false }}
         show:
           fields:
@@ -215,34 +220,40 @@ easy_admin:
             - {property: 'machNaam', label: 'Naam'}
             - {property: 'machOmschrijving', label: 'Omschrijving'}
             - {property: 'machMat', label: 'Mogelijke Materialen'}
+            - {property: 'machineLinks', label: 'Links'}
             - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
-            - {property: 'machImgAlt', label: 'Afbeelding Omschrijving'}
       MachineStaat:
         class: App\Entity\MachineStaat
         list:
           fields:
-            - {property: 'mstaatStatus', label: 'Status'}
             - {property: 'mstaatMach', label: 'Machine'}
-            - {property: 'mstaatStart', label: 'Status Begin'}
-            - {property: 'mstaatStop', label: 'Status Eind'}
+            - {property: 'mstaatStatus', label: 'Status'}
+            - {property: 'mstaatStart', label: 'Status Begin', type: 'date'}
+            - {property: 'mstaatStop', label: 'Status Eind', type: 'date'}
         form:
           fields:
-            - {property: 'mstaatStatus', label: 'Status'}
             - {property: 'mstaatMach', label: 'Machine'}
-            - {property: 'mstaatStart', label: 'Status Begin'}
-            - {property: 'mstaatStop', label: 'Status Eind'}
+            - {property: 'mstaatStatus', label: 'Status'}
+            - {property: 'mstaatStart', label: 'Status Begin', type_options: {widget: single_text}}
+            - {property: 'mstaatStop', label: 'Status Eind', type_options: {widget: single_text}}
       MachineLink:
         class: App\Entity\MachineLink
         list:
           fields:
             - {property: 'mlinkMach', label: 'Machine'}
             - {property: 'mlinkTitel', label: 'link omschrijving'}
-            - {property: 'mlinkPad', label: 'Url', type: 'url'}
+            - {property: 'mlinkPad', label: 'Url'}
         form:
           fields:
             - {property: 'mlinkMach', label: 'Machine'}
             - {property: 'mlinkTitel', label: 'link omschrijving'}
-            - {property: 'mlinkPad', label: 'Url', type: 'url'}
+            - {property: 'mlinkPad', label: 'Url'}
+        show:
+          fields:
+            - {property: 'mlinkMach', label: 'Machine'}
+            - {property: 'mlinkTitel', label: 'link omschrijving'}
+            - {property: 'mlinkPad', label: 'Url'}
+
 
       MachineFile:
         class: App\Entity\MachineFile
@@ -256,6 +267,12 @@ easy_admin:
             - {property: 'mfileMach', label: 'Machine'}
             - {property: 'mfileTitel', label: 'File omschrijving'}
             - {property: 'mfileFile', type: 'vich_file', label: 'File'}
+        show:
+          fields:
+            - {property: 'mfileMach', label: 'Machine'}
+            - {property: 'mfileTitel', label: 'File omschrijving'}
+            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '%uploads_machine_file_path%'}
+
 
   #Shop--------------------------------------------------------------------------------------------------------------------
       ShopCategorie:
@@ -270,6 +287,11 @@ easy_admin:
             - {property: 'scatOrder', label: 'Rangschikking'}
             - {property: 'scatNaam', label: 'Categorie Naam'}
             - {property: 'shopmaterialen', label: 'shop items'}
+        show:
+          fields:
+            - {property: 'scatOrder', label: 'Rangschikking'}
+            - {property: 'scatNaam', label: 'Categorie Naam'}
+            - {property: 'shopmaterialen', label: 'shop items'}
 
       Shopmateriaal:
         class: App\Entity\Shopmateriaal
@@ -277,9 +299,9 @@ easy_admin:
           sort: ['smatOrder', 'ASC']
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
+            - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatScat', label: 'Categorie'}
             - {property: 'smatNaam', label: 'materiaal Naam'}
-            - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs'}
         form:
@@ -290,6 +312,14 @@ easy_admin:
             - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs', type: 'money', type_options: { currency: 'EUR' }}
+        show:
+          fields:
+            - {property: 'smatOrder', label: 'Rangschikking'}
+            - {property: 'smatScat', label: 'Categorie'}
+            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatInStock', label: 'In Stock'}
+            - {property: 'smatAfmeting', label: 'Afmetingen'}
+            - {property: 'smatPrijs', label: 'Prijs'}
 
 #fabmoment==============================================================================================================================
       Fabmoment:
@@ -304,34 +334,46 @@ easy_admin:
         form:
           fields:
             - {property: 'fabIsPosted', label: 'Publiek'}
+            - {property: 'fabFiles', label: 'Bestanden'}
+            #TODO: add Files
+        show:
+          fields:
+            - {property: 'fabIsPosted', label: 'Publiek'}
             - {property: 'fabDatum', label: 'Datum'}
             - {property: 'fabTitel', label: 'Titel'}
             - {property: 'fabOmschrijving', label: 'Omschrijving'}
-            #TODO:-----
+            - {property: 'fabUse', label: 'Gebruiker'}
+            - {property: 'fabMaches', label: 'Machines'}
+            - {property: 'fabMats', label: 'Materialen'}
+            - {property: 'fabFiles', label: 'Bestanden'}
+            - {property: 'fabImgs', label: 'Afbeeldingen'}
+            #TODO: show all images ook hieronder!
       FabImg:
         class: App\Entity\FabImg
         list:
+          actions: ['-edit']
+          fields:
+            - {property: 'fabimgFab', label: 'Fabmoment'}
+#            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+        show:
+          actions: ['-edit']
           fields:
             - {property: 'fabimgFab', label: 'Fabmoment'}
             - {property: 'fabimgImgPad', label: 'Afbeelding'}
-            - {property: 'fabimgImgAlt', label: 'Afbeelding Omschrijving'}
-        form:
-          fields:
-            - {property: 'fabimgFab', label: 'Fabmoment'}
-            - {property: 'fabimgImgPad', label: 'Afbeelding'}
-            - {property: 'fabimgImgAlt', label: 'Afbeelding Omschrijving'}
+#            - {property: 'fabImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+#            TODO:TODO:TODO:eeeee
       FabFile:
         class: App\Entity\FabFile
-        list:
-          fields:
-            - {property: 'fabfileFab', label: 'Fabmoment'}
-            - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
-            - {property: 'fabfilePad', label: 'File', type: 'file'}
-        form:
-          fields:
-            - {property: 'fabfileFab', label: 'Fabmoment'}
-            - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
-            - {property: 'fabfilePad', label: 'File', type: 'file'}
+#          list:
+#            fields:
+#              - {property: 'fabfileFab', label: 'Fabmoment'}
+#              - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
+#              - {property: 'fabfilePad', label: 'File', type: 'file'}
+#          form:
+#            fields:
+#              - {property: 'fabfileFab', label: 'Fabmoment'}
+#              - {property: 'fabfileOmschrijving', label: 'File omschrijving'}
+#              - {property: 'fabfilePad', label: 'File', type: 'file'}
       Materiaal:
         class: App\Entity\Materiaal
         list:
@@ -340,36 +382,117 @@ easy_admin:
         form:
           fields:
             - {property: 'matNaam', label: 'Materiaal'}
+        show:
+          fields:
+            - {property: 'matNaam', label: 'Materiaal'}
 
 #Nieuws & Events==============================================================================================================================
   #Nieuws--------------------------------------------------------------------------------------------------------------------
       Nieuws:
         class: App\Entity\Nieuws
-#        list:
-#          fields:
-#        form:
-#          fields:
-  #Nieuws--------------------------------------------------------------------------------------------------------------------
+        list:
+          sort: 'nwsStart'
+          fields:
+            - {property: 'nwsTitel', label: 'Titel'}
+            - {property: 'nwsOmschrijving', label: 'Omschrijving'}
+            - {property: 'nwsStart', label: 'Aanvang'}
+            - {property: 'nwsStop', label: 'Einde'}
+        form:
+          fields:
+            - {property: 'nwsTitel', label: 'Titel'}
+            - {property: 'nwsOmschrijving', label: 'Omschrijving'}
+            - {property: 'nwsStart', label: 'Aanvang', type_options: {widget: single_text}}
+            - {property: 'nwsStop', label: 'Einde', type_options: {widget: single_text}}
+#            - {property: 'nwsImgFile', type: 'vich_image', label: 'Afbeelding File'}
+        show:
+          fields:
+            - {property: 'nwsTitel', label: 'Titel'}
+            - {property: 'nwsOmschrijving', label: 'Omschrijving'}
+            - {property: 'nwsStart', label: 'Aanvang'}
+            - {property: 'nwsStop', label: 'Einde'}
+#            - {property: 'nwsImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+
+      #EVENTS--------------------------------------------------------------------------------------------------------------------
+#      TODO: make dates nullable
       Event:
         class: App\Entity\Event
-#        list:
-#          fields:
-#        form:
-#          fields:
+        list:
+          fields:
+            - {property: 'eveTitel', label: 'Titel'}
+            - {property: 'eveOmschrijving', label: 'Omschrijving'}
+            - {property: 'eveStart', label: 'Aanvang'}
+            - {property: 'eveStop', label: 'Einde'}
+        form:
+          fields:
+            - {property: 'eveTitel', label: 'Titel'}
+            - {property: 'eveOmschrijving', label: 'Omschrijving'}
+            - {property: 'eveStart', label: 'Aanvang', type_options: {widget: single_text}}
+            - {property: 'eveStop', label: 'Einde', type_options: {widget: single_text}}
+            - {property: 'eveMetInschrijvingen', label: 'Met inschrijvingen'}
+            - {property: 'eveMaxPers', label: 'Max. Deelnemers'}
+#            - {property: 'eveImgFile', type: 'vich_image', label: 'Afbeelding File'}
+            - {property: 'inschrijvings', label: 'inschrijvingen'}
+        show:
+          fields:
+            - {property: 'eveTitel', label: 'Titel'}
+            - {property: 'eveOmschrijving', label: 'Omschrijving'}
+            - {property: 'eveStart', label: 'Aanvang'}
+            - {property: 'eveStop', label: 'Einde'}
+            - {property: 'eveMetInschrijvingen', label: 'Met inschrijvingen'}
+            - {property: 'eveMaxPers', label: 'Max. Deelnemers'}
+#            - {property: 'eveImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+            - {property: 'inschrijvings', label: 'Inschrijvingen'}
+
+
       Inschrijving:
         class: App\Entity\Inschrijving
-#        list:
-#          fields:
-#        form:
-#          fields:
+        list:
+          actions: ['-edit']
+          fields:
+            - {property: 'insEve', label: 'Event'}
+            - {property: 'insUse', label: 'Gebruiker'}
+        show:
+          actions: ['-edit']
+          fields:
+            - {property: 'insEve', label: 'Event'}
+            - {property: 'insUse', label: 'Gebruiker'}
 
-#user==============================================================================================================================
+
+      #user==============================================================================================================================
       User:
         class: App\Entity\User
-#        list:
-#          fields:
-#        form:
-#          fields:
+        list:
+          fields:
+            - {property: 'useVn', label: 'Voornaam'}
+            - {property: 'useAn', label: 'Naam'}
+            - {property: 'email', label: 'Mail', type: 'email'}
+            - {property: 'useBeroep', label: 'Beroep'}
+            - {property: 'useGemeente', label: 'Gemeente'}
+        form:
+          fields:
+            - {property: 'useFabWorthy', label: 'Fab-krediet'}
+            - {property: 'useIsBlocked', label: 'Geblokeerd'}
+            - {property: 'useIsDeleted', label: 'Verwijderd'}
+            - {property: 'useIsActief', label: 'Actief'}
+        show:
+          fields:
+            - {property: 'useVn', label: 'Voornaam'}
+            - {property: 'useAn', label: 'Naam'}
+            - {property: 'useGeboorte', label: 'Geboortedatum'}
+            - {property: 'email', label: 'Mail', type: 'email'}
+            - {property: 'useBeroep', label: 'Beroep'}
+            - {property: 'useSchool', label: 'School'}
+            - {property: 'useRichting', label: 'Richting'}
+            - {property: 'usePostcode', label: 'Postcode'}
+            - {property: 'useGemeente', label: 'Gemeente'}
+            - {property: 'useLand', label: 'Land'}
+            - {property: 'useFabWorthy', label: 'Fab-krediet'}
+            - {property: 'useIsBlocked', label: 'Geblokeerd'}
+            - {property: 'useIsDeleted', label: 'Verwijderd'}
+            - {property: 'useIsActief', label: 'Actief'}
+            - createdAt
+            - updatedAt
+
       MachineRecht:
         class: App\Entity\MachineRecht
 #        list:
@@ -382,10 +505,3 @@ easy_admin:
 #          fields:
 #        form:
 #          fields:
-
-
-      Book:
-        class: App\Entity\Book
-        list:
-          fields:
-            - {property: 'image', type: 'image', label: 'Afbeelding', base_path: 'media'}

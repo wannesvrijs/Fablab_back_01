@@ -40,13 +40,13 @@ class Regels
     private $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      * @Groups({"regels:read","admin:write"})
      */
     private $regNaam;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @Groups({"regels:read","admin:write"})
      */
     private $regOmschrijving;

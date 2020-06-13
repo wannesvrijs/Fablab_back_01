@@ -73,4 +73,9 @@ class FabMach
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "$this->fabmachMach";
+    }
 }

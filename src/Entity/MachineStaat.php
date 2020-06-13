@@ -51,13 +51,13 @@ class MachineStaat
     private $mstaatStatus;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
     private $mstaatStart;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @Groups({"machinecategorie:read", "machinestaat:read", "admin:write"})
      */
     private $mstaatStop;

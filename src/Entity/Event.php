@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 //  TODO:
 /**
@@ -29,6 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
+ * @Vich\Uploadable()
  * @ORM\Entity(repositoryClass=EventRepository::class)
  */
 class Event
@@ -92,7 +94,7 @@ class Event
     private $evePrijs;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"admin:read"})
      */
     private $eveGoogleId;
@@ -103,11 +105,28 @@ class Event
      */
     private $inschrijvings;
 
+    /**
+     * @Vich\UploadableField(mapping="eve_img", fileNameProperty="eveImgPad")
+     */
+    private $eveImgFile;
+
+
+    public function getEveImgFile()
+    {
+        return $this->eveImgFile;
+    }
+
+    public function setEveImgFile($eveImgFile): void
+    {
+        $this->eveImgFile = $eveImgFile;
+        $this->updatedAt = new \DateTime();
+    }
+
+
     public function __construct()
     {
         $this->inschrijvings = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -143,7 +162,7 @@ class Event
         return $this->eveImgPad;
     }
 
-    public function setEveImgPad(?string $eveImgPad): self
+    public function setEveImgPad(?string $eveImgPad)
     {
         $this->eveImgPad = $eveImgPad;
 
@@ -180,7 +199,7 @@ class Event
         return $this->eveStop;
     }
 
-    public function setEveStop(\DateTimeInterface $eveStop): self
+    public function setEveStop(?\DateTimeInterface $eveStop): self
     {
         $this->eveStop = $eveStop;
 

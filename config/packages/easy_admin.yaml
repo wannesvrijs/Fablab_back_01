@@ -50,10 +50,9 @@ easy_admin:
             - label: "Users"
               children:
                     - {entity: User, label: "Users lijst", icon: "user-astronaut"}
-                    - {entity: MachineRecht, label: "Machinerechten", icon: "thumbs-up"}
-                    - {entity: MachineLog, label: "Machine-logs", icon: "stopwatch"}
+#                    - {entity: MachineRecht, label: "Machinerechten", icon: "thumbs-up"}
+#                    - {entity: MachineLog, label: "Machine-logs", icon: "stopwatch"}
 
-            - {label: "TEST"}
 
 
 
@@ -325,6 +324,7 @@ easy_admin:
       Fabmoment:
         class: App\Entity\Fabmoment
         list:
+          actions: ['-new']
           sort: 'fabDatum'
           fields:
             - {property: 'fabIsPosted', label: 'Publiek'}
@@ -351,17 +351,17 @@ easy_admin:
       FabImg:
         class: App\Entity\FabImg
         list:
-          actions: ['-edit']
+          actions: ['-edit', '-new']
           fields:
             - {property: 'fabimgFab', label: 'Fabmoment'}
-#            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_fab_img_path%'}
         show:
           actions: ['-edit']
           fields:
             - {property: 'fabimgFab', label: 'Fabmoment'}
             - {property: 'fabimgImgPad', label: 'Afbeelding'}
-#            - {property: 'fabImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
-#            TODO:TODO:TODO:eeeee
+            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_fab_img_path%'}
+
       FabFile:
         class: App\Entity\FabFile
 #          list:
@@ -428,7 +428,8 @@ easy_admin:
             - {property: 'eveStop', label: 'Einde', type_options: {widget: single_text}}
             - {property: 'eveMetInschrijvingen', label: 'Met inschrijvingen'}
             - {property: 'eveMaxPers', label: 'Max. Deelnemers'}
-#            - {property: 'eveImgFile', type: 'vich_image', label: 'Afbeelding File'}
+            - {property: 'evePrijs', label: 'Prijs' , type: 'money', type_options: { currency: 'EUR' }}
+            - {property: 'eveImgFile', type: 'vich_image', label: 'Afbeelding File'}
             - {property: 'inschrijvings', label: 'inschrijvingen'}
         show:
           fields:
@@ -438,14 +439,15 @@ easy_admin:
             - {property: 'eveStop', label: 'Einde'}
             - {property: 'eveMetInschrijvingen', label: 'Met inschrijvingen'}
             - {property: 'eveMaxPers', label: 'Max. Deelnemers'}
-#            - {property: 'eveImgPad', type: 'image', label: 'Afbeelding', base_path: '%TODOPATH%'}
+            - {property: 'evePrijs', label: 'Prijs' }
+            - {property: 'eveImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_eve_img_path%'}
             - {property: 'inschrijvings', label: 'Inschrijvingen'}
 
 
       Inschrijving:
         class: App\Entity\Inschrijving
         list:
-          actions: ['-edit']
+          actions: ['-edit', '-new']
           fields:
             - {property: 'insEve', label: 'Event'}
             - {property: 'insUse', label: 'Gebruiker'}
@@ -491,14 +493,14 @@ easy_admin:
             - createdAt
             - updatedAt
 
-      MachineRecht:
-        class: App\Entity\MachineRecht
+#      MachineRecht:
+#        class: App\Entity\MachineRecht
 #        list:
 #          fields:
 #        form:
 #          fields:
-      MachineLog:
-        class: App\Entity\MachineLog
+#      MachineLog:
+#        class: App\Entity\MachineLog
 #        list:
 #          fields:
 #        form:

@@ -157,7 +157,6 @@ class Machine
     }
 
 
-
     public function __construct()
     {
         $this->machineLogs = new ArrayCollection();
@@ -238,7 +237,7 @@ class Machine
         return $this->machImgPad;
     }
 
-    public function setMachImgPad(?string $machImgPad): self
+    public function setMachImgPad(?string $machImgPad)
     {
         $this->machImgPad = $machImgPad;
 

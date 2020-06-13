@@ -8,6 +8,8 @@ parameters:
     cache_adapter: cache.adapter.filesystem
     uploads_machine_images_path: '/uploads/files/machine/images'
     uploads_machine_file_path: '/uploads/files/machine/files'
+    uploads_fab_img_path: '/uploads/files/fabmoments/images'
+    uploads_eve_img_path: '/uploads/files/events/images'
 
 services:
     # default configuration for services in *this* file

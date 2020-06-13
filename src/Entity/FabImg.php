@@ -5,7 +5,9 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabImgRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 //     TODO:
 /**
@@ -23,10 +25,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
+ * @Vich\Uploadable()
  * @ORM\Entity(repositoryClass=FabImgRepository::class)
  */
 class FabImg
 {
+
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -46,6 +52,24 @@ class FabImg
      * @Groups({"fabmoment:read"})
      */
     private $fabimgImgPad;
+
+
+    /**
+     * @Vich\UploadableField(mapping="fab_img", fileNameProperty="fabimgImgPad")
+     */
+    private $fabimgImgFile;
+
+
+    public function getFabimgImgFile()
+    {
+        return $this->fabimgImgFile;
+    }
+
+    public function setFabimgImgFile($fabimgImgFile): void
+    {
+        $this->fabimgImgFile = $fabimgImgFile;
+        $this->updatedAt = new \DateTime();
+    }
 
 
     public function getId(): ?int
@@ -70,7 +94,7 @@ class FabImg
         return $this->fabimgImgPad;
     }
 
-    public function setFabimgImgPad(string $fabimgImgPad): self
+    public function setFabimgImgPad(?string $fabimgImgPad)
     {
         $this->fabimgImgPad = $fabimgImgPad;
 

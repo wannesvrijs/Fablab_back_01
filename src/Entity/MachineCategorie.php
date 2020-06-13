@@ -137,7 +137,7 @@ class MachineCategorie
         return $this->mcatImgPad;
     }
 
-    public function setMcatImgPad(?string $mcatImgPad): self
+    public function setMcatImgPad(?string $mcatImgPad)
     {
         $this->mcatImgPad = $mcatImgPad;
 

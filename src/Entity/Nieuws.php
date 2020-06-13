@@ -65,7 +65,7 @@ class Nieuws
     private $nwsStop;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"admin:write","admin:read"})
      */
     private $nwsGoogleId;

@@ -33,7 +33,7 @@ class Land
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=80)
+     * @ORM\Column(type="string", length=40)
      * @Groups({"land:read"})
      */
     private $landNaam;

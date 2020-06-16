@@ -45,7 +45,7 @@ class MachineLink
     private $mlinkMach;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=40, nullable=true)
      * @Groups({"machinecategorie:item:read", "machinelink:read", "admin:write"})
      */
     private $mlinkTitel;

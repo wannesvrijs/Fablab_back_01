@@ -51,7 +51,7 @@ class MachineFile
     private $mfileMach;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=40, nullable=true)
      * @Groups({"machinecategorie:item:read", "machinefile:read", "admin:write"})
      */
     private $mfileTitel;

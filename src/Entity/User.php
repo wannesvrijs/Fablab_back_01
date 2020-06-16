@@ -55,7 +55,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=80, unique=true)
      * @Groups({"user:read", "user:write"})
      * @Assert\NotBlank(message="Vul een geldig Emailadres in")
      * @Assert\Email(message="Vul een geldig Emailadres in")
@@ -115,6 +115,15 @@ class User implements UserInterface
     private $useGeboorte;
 
     /**
+     * @ORM\Column(type="integer", length=14, nullable=true)
+     * @Assert\Positive()
+     * @Assert\Length(
+     *     min="8"
+     * )
+     */
+    private $useTel;
+
+    /**
      * @ORM\Column(type="string", length=40)
      * @Groups({"user:read", "user:write"})
      * @Assert\NotBlank(message="Vul een land in")
@@ -165,7 +174,7 @@ class User implements UserInterface
     private $useFabworthy = 3;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=64)
      */
     private $useRegkey;
 
@@ -201,6 +210,8 @@ class User implements UserInterface
      * @Groups({"user:read"})
      */
     private $inschrijvingen;
+
+
 
 //    /**
 //     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", cascade={"persist"}, orphanRemoval=true)
@@ -612,5 +623,17 @@ class User implements UserInterface
     public function __toString(): ?string
     {
         return $this->useVn.' '.$this->useAn.' ('.$this->email.')';
+    }
+
+    public function getUseTel(): ?int
+    {
+        return $this->useTel;
+    }
+
+    public function setUseTel(?int $useTel): self
+    {
+        $this->useTel = $useTel;
+
+        return $this;
     }
 }

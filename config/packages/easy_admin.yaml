@@ -6,35 +6,6 @@ easy_admin:
 
         menu:
 
-            - {label: "Info"}
-            - label: "Paginacontent"
-              children:
-                    - {entity: FablabInfo, label: "'Wat is FabLab'", icon: "info"}
-                    - {entity: Regels, label: "Huisregels", icon: "gavel"}
-                    - {entity: FaqCategorie, label: "FAQ Categorie", icon: "question-circle"}
-                    - {entity: Faq, label: "FAQ", icon: "question"}
-                    - {entity: Stage, label: "Stage", icon: "child"}
-            - label: "Machines"
-              children:
-                    - {entity: MachineCategorie, label: "Machines Catgorie", icon: "cogs"}
-                    - {entity: Machine, label: "Machines", icon: "cog"}
-                    - {entity: MachineStaat, label: "Machine Staat", icon: "thermometer-half"}
-                    - {entity: MachineLink, label: "Informatie Links", icon: "link"}
-                    - {entity: MachineFile, label: "Opmaak Files", icon: "paperclip"}
-            - label: "Shop"
-              children:
-                    - {entity: ShopCategorie, label: "Shop Categorie", icon: "cubes"}
-                    - {entity: Shopmateriaal, label: "Shop Item", icon: "cube"}
-
-
-            - {label: "Fabmoments"}
-            - label: "Fabmoments"
-              children:
-                    - {entity: Fabmoment, label: "Fabmoments", icon: "tools"}
-                    - {entity: FabImg, label: "Fabmoment Foto's", icon: "image"}
-                    - {entity: FabFile, label: "Fabmoment Files", icon: "paperclip"}
-                    - {entity: Materiaal, label: "Fabmoment Materialen", icon: "cube"}
-
 
             - {label: "Nieuws & Events"}
             - label: "Nieuws"
@@ -44,6 +15,36 @@ easy_admin:
               children:
                     - {entity: Event, label: "Event", icon: "calendar"}
                     - {entity: Inschrijving, label: "Inschrijvingen", icon: "calendar-check"}
+
+
+            - {label: "Fabmoments"}
+            - label: "Fabmoments"
+              children:
+                - {entity: Fabmoment, label: "Fabmoments", icon: "tools"}
+                - {entity: FabImg, label: "Fabmoment Foto's", icon: "image"}
+                - {entity: FabFile, label: "Fabmoment Files", icon: "paperclip"}
+                - {entity: Materiaal, label: "Fabmoment Materialen", icon: "cube"}
+
+            - {label: "Content"}
+            - label: "Info"
+              children:
+                - {entity: FablabInfo, label: "'Wat is FabLab'", icon: "info"}
+                - {entity: Regels, label: "Huisregels", icon: "gavel"}
+                - {entity: FaqCategorie, label: "FAQ Categorie", icon: "question-circle"}
+                - {entity: Faq, label: "FAQ", icon: "question"}
+                - {entity: Stage, label: "Stage", icon: "child"}
+            - label: "Machines"
+              children:
+                - {entity: MachineCategorie, label: "Machines Catgorie", icon: "cogs"}
+                - {entity: Machine, label: "Machines", icon: "cog"}
+                - {entity: MachineStaat, label: "Machine Staat", icon: "thermometer-half"}
+                - {entity: MachineLink, label: "Informatie Links", icon: "link"}
+                - {entity: MachineFile, label: "Opmaak Files", icon: "paperclip"}
+            - label: "Shop"
+              children:
+                - {entity: ShopCategorie, label: "Shop Categorie", icon: "cubes"}
+                - {entity: Shopmateriaal, label: "Shop Item", icon: "cube"}
+
 
 
             - {label: "Users"}

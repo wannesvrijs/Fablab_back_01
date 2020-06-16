@@ -54,7 +54,11 @@ body.show .form-horizontal, .content-body form  {
     background:  #f3f4f4!important;
 }
 
-.user-name, .btn-link {
+.user-name {
+    color: black;
+}
+
+.btn-link {
     color: #0f5ad3;
 }
 .logo-long {
@@ -68,7 +72,7 @@ li:not(.submenu-active).active .fa,
 }
 
 .treeview.menu-open .treeview-icon {
-    color: #00c487;
+    color: #0f5ad3;
     filter: opacity(100%);
 }
 
@@ -86,7 +90,7 @@ li:not(.submenu-active).active .fa,
     border: 2px solid #E3E3E3;
 }
 .btn-primary {
-    background-color: #0f5ad3 !important;
+    background-color: #00c487 !important;
 }
 .btn {
     box-shadow: none;
@@ -112,7 +116,7 @@ a {
 
 .sidebar-menu .fa {
     filter: opacity(100%);
-    color: #00c487;
+    color: #0f5ad3;
 }
 
 .content-wrapper {

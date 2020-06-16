@@ -47,7 +47,7 @@ class MachineCategorie
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      * @Groups({"machinecategorie:read", "admin:write", "fabmoment:read", "machine:read"})
      */
     private $mcatNaam;

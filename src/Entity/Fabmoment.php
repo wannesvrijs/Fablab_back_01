@@ -64,7 +64,7 @@ class Fabmoment
     private $fabUse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=120)
      * @Groups({"fabmoment:read", "fabmoment:write"})
      */
     private $fabTitel;
@@ -88,7 +88,7 @@ class Fabmoment
     private $fabIsPosted = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=120)
      * @Gedmo\Slug(fields={"fabTitel"})
      * @Groups({"fabmoment:read"})
      */

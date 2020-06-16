@@ -7,6 +7,7 @@ use App\Repository\FabImgRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 //     TODO:
@@ -56,6 +57,7 @@ class FabImg
 
     /**
      * @Vich\UploadableField(mapping="fab_img", fileNameProperty="fabimgImgPad")
+     * @Assert\Image(mimeTypes={"image/jpg", "image/jpeg", "image/png", "image/svg+xml"})
      */
     private $fabimgImgFile;
 

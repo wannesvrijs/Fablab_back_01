@@ -38,7 +38,7 @@ class Materiaal
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      * @Groups({"fabmoment:item:read","materiaal:read","admin:write"})
      */
     private $matNaam;

@@ -140,7 +140,7 @@ class Machine
     private $machImgFile;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $machBeschikbaar;
 

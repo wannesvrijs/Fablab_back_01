@@ -15,7 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
-//     TODO:
 
 /**
  * @ApiResource(
@@ -54,6 +53,7 @@ class Fabmoment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"fabmoment:read"})
      */
     private $id;
 

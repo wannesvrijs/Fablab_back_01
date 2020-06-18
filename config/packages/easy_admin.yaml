@@ -35,9 +35,9 @@ easy_admin:
                 - {entity: Stage, label: "Stage", icon: "child"}
             - label: "Machines"
               children:
-                - {entity: MachineCategorie, label: "Machines Catgorie", icon: "cogs"}
+                - {entity: MachineCategorie, label: "Machines Categorie", icon: "cogs"}
                 - {entity: Machine, label: "Machines", icon: "cog"}
-                - {entity: MachineStaat, label: "Machine Staat", icon: "thermometer-half"}
+                - {entity: MachineReservatie, label: "Machine Reservaties", icon: "thermometer-half"}
                 - {entity: MachineLink, label: "Informatie Links", icon: "link"}
                 - {entity: MachineFile, label: "Opmaak Files", icon: "paperclip"}
             - label: "Shop"
@@ -201,10 +201,11 @@ easy_admin:
         class: App\Entity\Machine
         list:
           fields:
-            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machBeschikbaar', label: 'Beschikbaar'}
             - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
             - {property: 'machNaam', label: 'Naam'}
-            - {property: 'machOmschrijving', label: 'Omschrijving'}
+            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machineReservaties', label: 'Reservaties'}
         form:
           fields:
             - {property: 'machMcat', label: 'Categorie'}
@@ -219,23 +220,22 @@ easy_admin:
             - {property: 'machMcat', label: 'Categorie'}
             - {property: 'machNaam', label: 'Naam'}
             - {property: 'machOmschrijving', label: 'Omschrijving'}
+            - {property: 'machineReservaties', label: 'Reservaties'}
             - {property: 'machMat', label: 'Mogelijke Materialen'}
             - {property: 'machineLinks', label: 'Links'}
             - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
-      MachineStaat:
-        class: App\Entity\MachineStaat
+      MachineReservatie:
+        class: App\Entity\MachineReservatie
         list:
           fields:
-            - {property: 'mstaatMach', label: 'Machine'}
-            - {property: 'mstaatStatus', label: 'Status'}
-            - {property: 'mstaatStart', label: 'Status Begin', type: 'date'}
-            - {property: 'mstaatStop', label: 'Status Eind', type: 'date'}
+            - {property: 'mresMach', label: 'Machine'}
+            - {property: 'mresStart', label: 'Reservatie Begin', type: 'date'}
+            - {property: 'mresStop', label: 'Reservatie Eind', type: 'date'}
         form:
           fields:
-            - {property: 'mstaatMach', label: 'Machine'}
-            - {property: 'mstaatStatus', label: 'Status'}
-            - {property: 'mstaatStart', label: 'Status Begin', type_options: {widget: single_text}}
-            - {property: 'mstaatStop', label: 'Status Eind', type_options: {widget: single_text}}
+            - {property: 'mresMach', label: 'Machine'}
+            - {property: 'mresStart', label: 'Reservatie Begin', type_options: {widget: single_text}}
+            - {property: 'mresStop', label: 'Reservatie Eind', type_options: {widget: single_text}}
       MachineLink:
         class: App\Entity\MachineLink
         list:

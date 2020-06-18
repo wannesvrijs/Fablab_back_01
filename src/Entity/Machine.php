@@ -117,10 +117,10 @@ class Machine
     private $fabMaches;
 
     /**
-     * @ORM\OneToMany(targetEntity=MachineStaat::class, mappedBy="mstaatMach", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=MachineReservatie::class, mappedBy="mresMach", orphanRemoval=true)
      * @Groups({"admin:write"})
      */
-    private $machineStaten;
+    private $machineReservaties;
 
     /**
      * @ORM\OneToMany(targetEntity=MachineLink::class, mappedBy="mlinkMach", cascade={"persist"}, orphanRemoval=true)
@@ -138,6 +138,11 @@ class Machine
      * @Vich\UploadableField(mapping="machine_img", fileNameProperty="machImgPad")
      */
     private $machImgFile;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $machBeschikbaar;
 
     /**
      * @return mixed
@@ -162,7 +167,7 @@ class Machine
         $this->machineLogs = new ArrayCollection();
         $this->machineRechten = new ArrayCollection();
         $this->fabMaches = new ArrayCollection();
-        $this->machineStaten = new ArrayCollection();
+        $this->machineReservaties = new ArrayCollection();
         $this->machineLinks = new ArrayCollection();
         $this->machineFiles = new ArrayCollection();
     }
@@ -362,42 +367,42 @@ class Machine
     }
 
     /**
-     * @return Collection|MachineStaat[]
+     * @return Collection|MachineReservatie[]
      */
-    public function getMachineStaten(): Collection
+    public function getMachineReservaties(): Collection
     {
-        return $this->machineStaten;
+        return $this->machineReservaties;
     }
 
     /**
      * @Groups({"machinecategorie:read"})
-     * @SerializedName("machineStaten")
+     * @SerializedName("machineReservaties")
      */
-    public function getMachineStatenUpcomming()
+    public function getMachineReservatiesUpcomming()
     {
         $criteria = MachineRepository::createFilterByUpcommingCriteria();
 
-        return $this->machineStaten->matching($criteria);
+        return $this->machineReservaties->matching($criteria);
 
     }
 
-    public function addMachineStaten(MachineStaat $machineStaten): self
+    public function addMachineReservaties(MachineReservatie $machineReservaties): self
     {
-        if (!$this->machineStaten->contains($machineStaten)) {
-            $this->machineStaten[] = $machineStaten;
-            $machineStaten->setMstaatMach($this);
+        if (!$this->machineReservaties->contains($machineReservaties)) {
+            $this->machineReservaties = $machineReservaties;
+            $machineReservaties->setMresMach($this);
         }
 
         return $this;
     }
 
-    public function removeMachineStaten(MachineStaat $machineStaten): self
+    public function removeMachineReservaties(MachineReservatie $machineReservaties): self
     {
-        if ($this->machineStaten->contains($machineStaten)) {
-            $this->machineStaten->removeElement($machineStaten);
+        if ($this->machineReservaties->contains($machineReservaties)) {
+            $this->machineReservaties->removeElement($machineReservaties);
             // set the owning side to null (unless already changed)
-            if ($machineStaten->getMstaatMach() === $this) {
-                $machineStaten->setMstaatMach(null);
+            if ($machineReservaties->getMresMach() === $this) {
+                $machineReservaties->setMresMach(null);
             }
         }
 
@@ -481,6 +486,18 @@ class Machine
     public function __toString()
     {
         return $this->machNaam;
+    }
+
+    public function getMachBeschikbaar(): ?bool
+    {
+        return $this->machBeschikbaar;
+    }
+
+    public function setMachBeschikbaar(?bool $machBeschikbaar): self
+    {
+        $this->machBeschikbaar = $machBeschikbaar;
+
+        return $this;
     }
 
 

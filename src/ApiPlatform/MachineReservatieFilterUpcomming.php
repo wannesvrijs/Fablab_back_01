@@ -7,12 +7,10 @@ namespace App\ApiPlatform;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
-use App\Entity\Event;
-use App\Entity\MachineStaat;
-use App\Entity\Nieuws;
+use App\Entity\MachineReservatie;
 use Doctrine\ORM\QueryBuilder;
 
-class MachinestaatFilterUpcomming implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+class MachineReservatieFilterUpcomming implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
 
     private $now;
@@ -38,9 +36,9 @@ class MachinestaatFilterUpcomming implements QueryCollectionExtensionInterface, 
      */
     public function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
-        if ($resourceClass === MachineStaat::class) {
+        if ($resourceClass === MachineReservatie::class) {
             $rootalias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.mstaatStop > :now', $rootalias))
+            $queryBuilder->andWhere(sprintf('%s.mresStop > :now', $rootalias))
                 ->setParameter(':now', $this->now);
         }
 

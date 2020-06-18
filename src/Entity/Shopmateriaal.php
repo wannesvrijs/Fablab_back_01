@@ -50,13 +50,13 @@ class Shopmateriaal
     private $smatScat;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatNaam;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatAfmeting;

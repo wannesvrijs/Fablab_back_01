@@ -46,7 +46,7 @@ class MediaObject
 
     /**
      * @var string|null
-     * @Groups({"media_object_read"})
+     * @Groups({"fabImg_object_read"})
      */
     public $contentUrl;
 

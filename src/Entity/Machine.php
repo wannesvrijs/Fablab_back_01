@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MachineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -30,6 +32,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     }
  * )
  * @ORM\Entity(repositoryClass=MachineRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"machMcat.id": "exact"})
  * @Vich\Uploadable()
  */
 class Machine
@@ -41,7 +44,7 @@ class Machine
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"machine:read"})
+     * @Groups({"machine:read", "machinecategorie:read"})
      */
     private $id;
 
@@ -54,7 +57,7 @@ class Machine
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machinecategorie:read","machine:read","admin:write"})
+     * @Groups({"machinecategorie:read","machine:read","admin:write", "machinerecht:read"})
      */
     private $machNaam;
 
@@ -141,6 +144,7 @@ class Machine
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"machinecategorie:read","admin:write", "machine:read", "machine:item:read"})
      */
     private $machBeschikbaar;
 

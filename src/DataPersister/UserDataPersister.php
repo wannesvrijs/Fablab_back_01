@@ -30,15 +30,19 @@ class UserDataPersister implements DataPersisterInterface
     public function persist($data)
     {
 
+        $regkey = bin2hex(random_bytes(32));
+
         if($data->getPlainPassword()){
             $data->setPassword(
                 $this->passwordEncoder->encodePassword($data, $data->getPlainPassword())
             );
             $data->eraseCredentials();
         }
-        $data->setUseRegkey(bin2hex(random_bytes(34)));
+        $data->setUseRegkey($regkey);
+
         $this->entityManager->persist($data);
         $this->entityManager->flush();
+
     }
 
     public function remove($data)

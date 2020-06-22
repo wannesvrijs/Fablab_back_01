@@ -28,7 +28,6 @@ security:
 
         api:
             pattern: ^/api/
-#            user_checker: App\Security\UserChecker
             anonymous: true
             stateless: true
             guard:

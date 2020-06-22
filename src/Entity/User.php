@@ -40,6 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"email"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\EntityListeners({"App\Doctrine\AfterRegistrationEmailListener"})
  */
 class User implements UserInterface
 {
@@ -165,7 +166,7 @@ class User implements UserInterface
      * @Groups({"user:read"})
      * @ORM\Column(type="boolean")
      */
-    private $useIsActief = true;
+    private $useIsActief = false;
 
     /**
      * @Groups({"user:read"})
@@ -207,7 +208,6 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Inschrijving::class, mappedBy="insUse", orphanRemoval=true)
-     * @Groups({"user:read"})
      */
     private $inschrijvingen;
 

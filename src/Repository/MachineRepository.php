@@ -26,7 +26,7 @@ class MachineRepository extends ServiceEntityRepository
         $now = new \DateTime(null, new \DateTimeZone('Europe/Brussels'));
 
         return Criteria::create()
-            ->andWhere(Criteria::expr()->gt('mstaatStop', $now))
+            ->andWhere(Criteria::expr()->gt('mresStop', $now))
             ;
 
     }

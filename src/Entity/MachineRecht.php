@@ -48,8 +48,10 @@ class MachineRecht
     /**
      * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineRechten")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"machinerecht:read"})
      */
     private $mrechMach;
+
 
     public function getId(): ?int
     {
@@ -82,5 +84,13 @@ class MachineRecht
     public function __toString()
     {
         return $this->id;
+    }
+
+    /**
+     * @Groups({"machinerecht:read"})
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

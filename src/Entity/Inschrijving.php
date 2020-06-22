@@ -51,7 +51,7 @@ class Inschrijving
     /**
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="inschrijvings")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"inschrijving:read"})
+     * @Groups({"inschrijving:read", "inschrijving:write"})
      */
     private $insEve;
 

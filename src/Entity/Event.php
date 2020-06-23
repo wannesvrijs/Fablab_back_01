@@ -53,13 +53,13 @@ class Event
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"event:read", "admin:write"})
+     * @Groups({"event:read","inschrijving:read", "admin:write"})
      */
     private $eveOmschrijving;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event:read", "admin:write"})
+     * @Groups({"event:read","inschrijving:read", "admin:write"})
      */
     private $eveImgPad;
 
@@ -71,7 +71,7 @@ class Event
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"event:read", "admin:write"})
+     * @Groups({"event:read","inschrijving:read" ,"admin:write"})
      */
     private $eveMaxPers;
 

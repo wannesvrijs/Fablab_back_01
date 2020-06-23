@@ -32,11 +32,11 @@ class CustomApiController extends AbstractController
 
         $user = $userRepository->findUserWithEmail($email);
         if (!$user) {
-            return $this->json("no match found for: $email",'404');
+            return $this->json("Geen account gevonden voor: $email",'404');
         }
 
         if ($user->getUseIsActief()){
-            return $this->json('already activated','403');
+            return $this->json('Dit profiel is reeds actief.','403');
         }
 
         if ($user->getUpdatedAt() < $history) {
@@ -45,12 +45,12 @@ class CustomApiController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->sendMail($user->getEmail(), $newregkey);
-            return $this->json('outdated activationlink, mail with new link has been send','403');
+            return $this->json('Verlopen activatielink, een mail met een nieuwe link werd verzonden.','401');
         }
 
 
         if (!$user->getUseRegkey() == $regkey) {
-            return $this->json("invalid match",'404');
+            return $this->json("Deze link bevat geen geldige gegevens.",'404');
         }
 
             $newregkey = bin2hex(random_bytes(32));
@@ -61,7 +61,7 @@ class CustomApiController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            return $this->json('activated','201');
+            return $this->json('Je profiel werd succesvol geactiveerd.','201');
 
     }
 }

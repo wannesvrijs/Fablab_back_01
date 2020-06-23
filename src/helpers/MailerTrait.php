@@ -25,7 +25,7 @@ trait MailerTrait
         $mail->Username = $_SERVER['EMAILADRESS'];
         $mail->Password = $_SERVER['PASSWORDMAIL'];
 
-        $mail->setFrom('wannes.vrijs@gmail.com', 'wannes');
+        $mail->setFrom('wannes.vrijs@gmail.com', 'FabLab Genk');
         $mail->addReplyTo('wannes.vrijs@gmail.com', 'FabLab Genk');
         $mail->addAddress($email);
         $mail->Subject = 'Vervoledig uw registratie';

@@ -281,17 +281,17 @@ easy_admin:
           sort: ['scatOrder', 'ASC']
           fields:
             - {property: 'scatOrder', label: 'Rangschikking'}
-            - {property: 'scatNaam', label: 'Categorie Naam'}
+            - {property: 'scatNaam', label: 'Materiaal'}
         form:
           fields:
             - {property: 'scatOrder', label: 'Rangschikking'}
-            - {property: 'scatNaam', label: 'Categorie Naam'}
-            - {property: 'shopmaterialen', label: 'shop items'}
+            - {property: 'scatNaam', label: 'Materiaal'}
+            - {property: 'shopmaterialen', label: 'sub-producten'}
         show:
           fields:
             - {property: 'scatOrder', label: 'Rangschikking'}
-            - {property: 'scatNaam', label: 'Categorie Naam'}
-            - {property: 'shopmaterialen', label: 'shop items'}
+            - {property: 'scatNaam', label: 'Materiaal'}
+            - {property: 'shopmaterialen', label: 'sub-producten'}
 
       Shopmateriaal:
         class: App\Entity\Shopmateriaal
@@ -300,16 +300,14 @@ easy_admin:
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
             - {property: 'smatInStock', label: 'In Stock'}
-            - {property: 'smatScat', label: 'Categorie'}
-            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatScat', label: 'Materiaal'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs'}
             - {property: 'smatEenheid', label: 'Eenheid'}
         form:
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
-            - {property: 'smatScat', label: 'Categorie'}
-            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatScat', label: 'Materiaal'}
             - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs', type: 'money', type_options: { currency: 'EUR' }}
@@ -318,8 +316,7 @@ easy_admin:
         show:
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
-            - {property: 'smatScat', label: 'Categorie'}
-            - {property: 'smatNaam', label: 'materiaal Naam'}
+            - {property: 'smatScat', label: 'Materiaal'}
             - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs'}

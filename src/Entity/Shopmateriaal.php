@@ -50,12 +50,6 @@ class Shopmateriaal
     private $smatScat;
 
     /**
-     * @ORM\Column(type="string", length=40)
-     * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
-     */
-    private $smatNaam;
-
-    /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
@@ -69,6 +63,7 @@ class Shopmateriaal
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatEenheid;
 
@@ -90,17 +85,6 @@ class Shopmateriaal
         return $this->id;
     }
 
-    public function getSmatNaam(): ?string
-    {
-        return $this->smatNaam;
-    }
-
-    public function setSmatNaam(string $smatNaam): self
-    {
-        $this->smatNaam = $smatNaam;
-
-        return $this;
-    }
 
     public function getSmatAfmeting(): ?string
     {
@@ -163,7 +147,7 @@ class Shopmateriaal
     }
     public function __toString()
     {
-        return $this->smatNaam;
+        return $this->smatAfmeting;
     }
 
     public function getSmatEenheid(): ?string

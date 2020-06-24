@@ -28,6 +28,10 @@ class UserChecker implements UserCheckerInterface
             throw new AuthenticationException('not valid');
         }
 
+        if (!$user->getUseIsActief())  {
+            throw new AuthenticationException('not valid');
+        }
+
         return;
     }
 

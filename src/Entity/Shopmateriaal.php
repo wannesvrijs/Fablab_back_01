@@ -62,7 +62,7 @@ class Shopmateriaal
     private $smatPrijs;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=3, nullable=true)
      * @Groups({"shopmateriaal:read", "shopcategorie:read", "admin:write"})
      */
     private $smatEenheid;

@@ -68,6 +68,11 @@ class Shopmateriaal
     private $smatPrijs;
 
     /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $smatEenheid;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"shopmateriaal:read", "shopcategorie:read","admin:write"})
      */
@@ -78,6 +83,7 @@ class Shopmateriaal
      * @Groups({"admin:write"})
      */
     private $smatOrder = 50;
+
 
     public function getId(): ?int
     {
@@ -158,5 +164,17 @@ class Shopmateriaal
     public function __toString()
     {
         return $this->smatNaam;
+    }
+
+    public function getSmatEenheid(): ?string
+    {
+        return $this->smatEenheid;
+    }
+
+    public function setSmatEenheid(?string $smatEenheid): self
+    {
+        $this->smatEenheid = $smatEenheid;
+
+        return $this;
     }
 }

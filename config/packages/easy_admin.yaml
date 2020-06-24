@@ -304,6 +304,7 @@ easy_admin:
             - {property: 'smatNaam', label: 'materiaal Naam'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs'}
+            - {property: 'smatEenheid', label: 'Eenheid'}
         form:
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
@@ -312,6 +313,8 @@ easy_admin:
             - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs', type: 'money', type_options: { currency: 'EUR' }}
+            - {property: 'smatEenheid', label: 'Eenheid'}
+
         show:
           fields:
             - {property: 'smatOrder', label: 'Rangschikking'}
@@ -320,8 +323,10 @@ easy_admin:
             - {property: 'smatInStock', label: 'In Stock'}
             - {property: 'smatAfmeting', label: 'Afmetingen'}
             - {property: 'smatPrijs', label: 'Prijs'}
+            - {property: 'smatEenheid', label: 'Eenheid'}
 
-#fabmoment==============================================================================================================================
+
+      #fabmoment==============================================================================================================================
       Fabmoment:
         class: App\Entity\Fabmoment
         list:

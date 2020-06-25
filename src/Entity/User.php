@@ -38,7 +38,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ApiFilter(PropertyFilter::class)
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Er bestaat reeds een profiel voor dit mailadres."
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\EntityListeners({"App\Doctrine\AfterRegistrationEmailListener"})
  */
@@ -58,8 +61,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=80, unique=true)
      * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank(message="Vul een geldig Emailadres in")
-     * @Assert\Email(message="Vul een geldig Emailadres in")
+     * @Assert\NotBlank(message="Vul een geldig Emailadres in.")
+     * @Assert\Email(message="Vul een geldig Emailadres in.")
      */
     private $email;
 
@@ -78,10 +81,10 @@ class User implements UserInterface
     /**
      * @Groups({"user:write"})
      * @SerializedName("password")
-     * @Assert\NotBlank(groups={"create"}, message="Vul een geldig wachtwoord in")
+     * @Assert\NotBlank(groups={"create"}, message="Vul een geldig wachtwoord in.")
      * @Assert\Length(
      *     min="8",
-     *     minMessage="je wachtwoord moet minimaal 8 tekens bevatten"
+     *     minMessage="je wachtwoord moet minimaal 8 tekens bevatten."
      * )
      */
     private $plainPassword;
@@ -89,10 +92,10 @@ class User implements UserInterface
     /**
      * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40)
-     * @Assert\NotBlank(message="Vul je voornaam in")
+     * @Assert\NotBlank(message="Vul je voornaam in.")
      * @Assert\Length(
      *     min="2",
-     *     minMessage="je voornaam moet minimaal 2 tekens bevatten"
+     *     minMessage="Vul een geldige voornaam in."
      * )
      *
      */
@@ -101,10 +104,10 @@ class User implements UserInterface
     /**
      * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=40)
-     * @Assert\NotBlank(message="Vul je achternaam in")
+     * @Assert\NotBlank(message="Vul je achternaam in.")
      * @Assert\Length(
      *     min="2",
-     *     minMessage="je achternaam moet minimaal 2 tekens bevatten"
+     *     minMessage="Vul een geldige achternaam in."
      * )
      */
     private $useAn;
@@ -112,6 +115,13 @@ class User implements UserInterface
     /**
      * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="Vul een geldige geboortedatum in.")
+     * @Assert\Date(message="Vul een geldige geboortedatum in.")
+     * @Assert\Range(
+     *      min = "-110 years",
+     *      max = "now",
+     *      notInRangeMessage = "Dat geloof ik niet.",
+     * )
      */
     private $useGeboorte;
 
@@ -127,20 +137,22 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=40)
      * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank(message="Vul een land in")
+     * @Assert\NotBlank(message="Vul een geldig land in.")
      */
     private $useLand;
 
 
     /**
      * @Groups({"user:write", "user:read"})
-     * @ORM\Column(type="string", length=40, nullable=true)
+     * @ORM\Column(type="string", length=40, nullable=false)
+     * @Assert\NotBlank(message="Vul een geldige gemeente in.")
      */
     private $useGemeente;
 
     /**
      * @Groups({"user:write", "user:read"})
      * @ORM\Column(type="string", length=12, nullable=true)
+     * @Assert\NotBlank(message="Vul een geldige postcode in.")
      */
     private $usePostcode;
 
@@ -212,27 +224,12 @@ class User implements UserInterface
     private $inschrijvingen;
 
 
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", cascade={"persist"}, orphanRemoval=true)
-//     * @Groups({"user:write"})
-//     * @Assert\Valid()
-//     */
-//    private $cheeseListings;
-//
-//    /**
-//     * @ORM\Column(type="string", length=50, nullable=true)
-//     * @Groups({"admin:read", "user:write"})
-//     */
-//    private $phoneNumber;
-
     public function __construct()
     {
         $this->machineLogs = new ArrayCollection();
         $this->machineRechten = new ArrayCollection();
         $this->fabmoments = new ArrayCollection();
         $this->inschrijvingen = new ArrayCollection();
-//        $this->cheeseListings = new ArrayCollection();
     }
 
     public function getId(): ?int

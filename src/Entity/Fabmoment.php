@@ -30,7 +30,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security_message"="Only the creator or admin can edit a FabMoment"},
  *     },
  *     attributes={
- *          "pagination_items_per_page"=12,
+ *          "pagination_items_per_page"=8,
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )

@@ -57,7 +57,7 @@ class Machine
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machinecategorie:read","machine:read","admin:write", "machinerecht:read"})
+     * @Groups({"machinecategorie:read","machine:read","admin:write", "machinerecht:read","fabmoment:item:read" })
      */
     private $machNaam;
 

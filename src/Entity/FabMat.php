@@ -45,6 +45,7 @@ class FabMat
      * @ORM\ManyToOne(targetEntity=Materiaal::class, inversedBy="fabMats")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"fabmoment:item:read", "fabmoment:write"})
+     *
      */
     private $fabmatMat;
 

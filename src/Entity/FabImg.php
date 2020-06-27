@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-//     TODO:MAKE ONLY USER RELATED TO IMAGES ABLE TO DELETE AND PUT EM
+//     TODO:MAKE ONLY USER RELATED TO IMAGES ABLE TO DELETE AND PUT
 /**
  * @ApiResource(
  *     collectionOperations={
@@ -72,6 +72,10 @@ class FabImg
      * @Assert\NotNull(groups={"fabImg_object_create"})
      * @Vich\UploadableField(mapping="fab_img", fileNameProperty="fabimgImgPad")
      * @Assert\Image(mimeTypes={"image/jpg", "image/jpeg", "image/png"})
+     * @Assert\File(
+     *     maxSize="2M",
+     *     maxSizeMessage="Een van de foto's is te groot, de maximale uploadgrootte is {{ limit }}"
+     * )
      * @Groups({"fabimg:write"})
      */
     public $fabimgImgFile;

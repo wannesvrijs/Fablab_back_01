@@ -14,6 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -39,7 +40,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     "fabTitel": "partial",
  *     "fabOmschrijving": "partial",
  *     "fabMats.fabmatMat.matNaam": "exact",
- *     "fabMaches.fabmachMach.machMcat.mcatNaam": "exact",
+ *     "fabMaches.fabmachMcat.mcatNaam": "exact",
  *     "fabUse.id": "exact",
  * })
  * @ORM\Entity(repositoryClass=FabmomentRepository::class)
@@ -66,18 +67,27 @@ class Fabmoment
     /**
      * @ORM\Column(type="string", length=120)
      * @Groups({"fabmoment:read", "fabmoment:write"})
+     * @Assert\NotBlank(message="Vul een titel in.")
      */
     private $fabTitel;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"fabmoment:read", "fabmoment:write"})
+     * @Assert\NotBlank(message="Vul een omschrijving in.")
      */
     private $fabOmschrijving;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      * @Groups({"fabmoment:read", "fabmoment:write"})
+     * @Assert\NotBlank(message="Vul een geldige datum in.")
+     * @Assert\Date(message="Vul een geldige datum in.")
+     * @Assert\Range(
+     *      min = "first day of January 2016",
+     *      max = "tomorrow",
+     *      notInRangeMessage = "Vul een geldige datum in.",
+     * )
      */
     private $fabDatum;
 
@@ -97,18 +107,21 @@ class Fabmoment
     /**
      * @ORM\OneToMany(targetEntity=FabImg::class, mappedBy="fabimgFab",cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read"})
+     * @Assert\Valid()
      */
     private $fabImgs;
 
     /**
      * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachFab", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read", "fabmoment:write"})
+     * @Assert\Valid()
      */
     private $fabMaches;
 
     /**
      * @ORM\OneToMany(targetEntity=FabMat::class, mappedBy="fabmatFab", cascade={"persist"}, orphanRemoval=true)
      * @Groups({"fabmoment:read", "fabmoment:write"})
+     * @Assert\Valid()
      */
     private $fabMats;
 

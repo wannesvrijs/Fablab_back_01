@@ -84,6 +84,13 @@ class MachineCategorie
     private $mcatImgFile;
 
     /**
+     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMcat", orphanRemoval=true)
+     */
+    private $fabMaches;
+
+
+
+    /**
      * @return mixed
      */
     public function getMcatImgFile()
@@ -101,6 +108,7 @@ class MachineCategorie
     public function __construct()
     {
         $this->machines = new ArrayCollection();
+        $this->fabMaches = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,4 +199,36 @@ class MachineCategorie
 
         return $this;
     }
+
+    /**
+     * @return Collection|FabMach[]
+     */
+    public function getFabMaches(): Collection
+    {
+        return $this->fabMaches;
+    }
+
+    public function addFabMach(FabMach $fabMach): self
+    {
+        if (!$this->fabMaches->contains($fabMach)) {
+            $this->fabMaches[] = $fabMach;
+            $fabMach->setFabmachMcat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFabMach(FabMach $fabMach): self
+    {
+        if ($this->fabMaches->contains($fabMach)) {
+            $this->fabMaches->removeElement($fabMach);
+            // set the owning side to null (unless already changed)
+            if ($fabMach->getFabmachMcat() === $this) {
+                $fabMach->setFabmachMcat(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

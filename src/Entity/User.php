@@ -84,7 +84,7 @@ class User implements UserInterface
      * @Assert\NotBlank(groups={"create"}, message="Vul een geldig wachtwoord in.")
      * @Assert\Length(
      *     min="8",
-     *     minMessage="je wachtwoord moet minimaal 8 tekens bevatten."
+     *     minMessage="Je wachtwoord moet minimaal 8 tekens bevatten."
      * )
      */
     private $plainPassword;

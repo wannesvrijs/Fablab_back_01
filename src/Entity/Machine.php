@@ -51,13 +51,13 @@ class Machine
     /**
      * @ORM\ManyToOne(targetEntity=MachineCategorie::class, inversedBy="machines")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"admin:write", "fabmoment:read", "machine:read"})
+     * @Groups({"admin:write", "machine:read"})
      */
     private $machMcat;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"machinecategorie:read","machine:read","admin:write", "machinerecht:read","fabmoment:item:read" })
+     * @Groups({"machinecategorie:read","machine:read","admin:write", "machinerecht:read"})
      */
     private $machNaam;
 
@@ -113,11 +113,6 @@ class Machine
      */
     private $machineRechten;
 
-    /**
-     * @ORM\OneToMany(targetEntity=FabMach::class, mappedBy="fabmachMach", orphanRemoval=true)
-     * @Groups({"machinecategorie:item:read","admin:write"})
-     */
-    private $fabMaches;
 
     /**
      * @ORM\OneToMany(targetEntity=MachineReservatie::class, mappedBy="mresMach", orphanRemoval=true)
@@ -170,7 +165,6 @@ class Machine
     {
         $this->machineLogs = new ArrayCollection();
         $this->machineRechten = new ArrayCollection();
-        $this->fabMaches = new ArrayCollection();
         $this->machineReservaties = new ArrayCollection();
         $this->machineLinks = new ArrayCollection();
         $this->machineFiles = new ArrayCollection();
@@ -339,36 +333,7 @@ class Machine
         return $this;
     }
 
-    /**
-     * @return Collection|FabMach[]
-     */
-    public function getFabMaches(): Collection
-    {
-        return $this->fabMaches;
-    }
 
-    public function addFabMach(FabMach $fabMach): self
-    {
-        if (!$this->fabMaches->contains($fabMach)) {
-            $this->fabMaches[] = $fabMach;
-            $fabMach->setFabmachMach($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFabMach(FabMach $fabMach): self
-    {
-        if ($this->fabMaches->contains($fabMach)) {
-            $this->fabMaches->removeElement($fabMach);
-            // set the owning side to null (unless already changed)
-            if ($fabMach->getFabmachMach() === $this) {
-                $fabMach->setFabmachMach(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|MachineReservatie[]

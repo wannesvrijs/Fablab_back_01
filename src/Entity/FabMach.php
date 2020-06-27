@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabMachRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -32,12 +34,6 @@ class FabMach
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="fabMaches")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"fabmoment:read", "fabmoment:write"})
-     */
-    private $fabmachMach;
 
     /**
      * @ORM\ManyToOne(targetEntity=Fabmoment::class, inversedBy="fabMaches")
@@ -45,22 +41,20 @@ class FabMach
      */
     private $fabmachFab;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MachineCategorie::class, inversedBy="fabMaches")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"fabmoment:write", "fabmoment:read"})
+     */
+    private $fabmachMcat;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFabmachMach(): ?Machine
-    {
-        return $this->fabmachMach;
-    }
-
-    public function setFabmachMach(?Machine $fabmachMach): self
-    {
-        $this->fabmachMach = $fabmachMach;
-
-        return $this;
-    }
 
     public function getFabmachFab(): ?Fabmoment
     {
@@ -74,8 +68,20 @@ class FabMach
         return $this;
     }
 
+    public function getFabmachMcat(): ?MachineCategorie
+    {
+        return $this->fabmachMcat;
+    }
+
+    public function setFabmachMcat(?MachineCategorie $fabmachMcat): self
+    {
+        $this->fabmachMcat = $fabmachMcat;
+
+        return $this;
+    }
+
     public function __toString()
     {
-        return "$this->fabmachMach";
+        return "$this->fabmachMcat";
     }
 }

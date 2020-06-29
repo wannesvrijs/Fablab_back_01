@@ -35,7 +35,7 @@ easy_admin:
                 - {entity: Stage, label: "Stage", icon: "child"}
             - label: "Machines"
               children:
-                - {entity: MachineCategorie, label: "Machines Categorie", icon: "cogs"}
+                - {entity: MachineCategorie, label: "Machines Techniek", icon: "cogs"}
                 - {entity: Machine, label: "Machines", icon: "cog"}
                 - {entity: MachineReservatie, label: "Machine Reservaties", icon: "thermometer-half"}
                 - {entity: MachineLink, label: "Informatie Links", icon: "link"}
@@ -182,48 +182,56 @@ easy_admin:
         class: App\Entity\MachineCategorie
         list:
           fields:
-            - {property: 'mcatNaam', label: 'Categorie'}
-            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'mcatNaam', label: 'Techniek'}
+            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_machine_images_path%'}
             - {property: 'mcatOmschrijving', label: 'Omschrijving'}
         form:
           fields:
-            - {property: 'mcatNaam', label: 'Categorie'}
+            - {property: 'mcatNaam', label: 'Techniek'}
             - {property: 'mcatOmschrijving', label: 'Omschrijving'}
             - {property: 'machines', label: 'Machines'}
             - {property: 'mcatImgFile', type: 'vich_image', label: 'Afbeelding File'}
         show:
           fields:
-            - {property: 'mcatNaam', label: 'Categorie'}
+            - {property: 'mcatNaam', label: 'Techniek'}
             - {property: 'mcatOmschrijving', label: 'Omschrijving'}
             - {property: 'machines', label: 'Machines'}
-            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'mcatImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_machine_images_path%'}
       Machine:
         class: App\Entity\Machine
         list:
           fields:
             - {property: 'machBeschikbaar', label: 'Beschikbaar'}
-            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_machine_images_path%'}
             - {property: 'machNaam', label: 'Naam'}
-            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machMcat', label: 'Techniek'}
             - {property: 'machineReservaties', label: 'Reservaties'}
         form:
           fields:
-            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machBeschikbaar', label: 'Beschikbaar'}
+            - {property: 'machMcat', label: 'Techniek'}
             - {property: 'machNaam', label: 'Naam'}
             - {property: 'machOmschrijving', label: 'Omschrijving'}
             - {property: 'machMat', label: 'Mogelijke Materialen'}
+            - {property: 'machAfmeting', label: 'Werkgebied'}
+            - {property: 'machFiles', label: 'Bestandsformaten'}
             - {property: 'machImgFile', type: 'vich_image', label: 'Afbeelding File'}
+            - {property: 'machVideoPad', label: 'VideoPad'}
             - {property: 'machineLinks', type: 'collection', label: 'Links', type_options: {entry_type: 'App\Form\MlinkLinkType', by_reference: false }}
             - {property: 'machineFiles', type: 'collection', label: 'voorbeeldfiles', type_options: {entry_type: 'App\Form\MfileFileType', by_reference: false }}
         show:
           fields:
-            - {property: 'machMcat', label: 'Categorie'}
+            - {property: 'machBeschikbaar', label: 'Beschikbaar'}
+            - {property: 'machMcat', label: 'Techniek'}
             - {property: 'machNaam', label: 'Naam'}
             - {property: 'machOmschrijving', label: 'Omschrijving'}
             - {property: 'machineReservaties', label: 'Reservaties'}
             - {property: 'machMat', label: 'Mogelijke Materialen'}
+            - {property: 'machAfmeting', label: 'Werkgebied'}
+            - {property: 'machFiles', label: 'Bestandsformaten'}
+            - {property: 'machVideoPad', label: 'VideoPad'}
             - {property: 'machineLinks', label: 'Links'}
-            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_machine_images_path%'}
+            - {property: 'machImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_machine_images_path%'}
       MachineReservatie:
         class: App\Entity\MachineReservatie
         list:
@@ -261,7 +269,7 @@ easy_admin:
           fields:
             - {property: 'mfileMach', label: 'Machine'}
             - {property: 'mfileTitel', label: 'File omschrijving'}
-            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '%uploads_machine_file_path%'}
+            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '/wdev_wannes/eindwerk/%uploads_machine_file_path%'}
         form:
           fields:
             - {property: 'mfileMach', label: 'Machine'}
@@ -271,7 +279,7 @@ easy_admin:
           fields:
             - {property: 'mfileMach', label: 'Machine'}
             - {property: 'mfileTitel', label: 'File omschrijving'}
-            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '%uploads_machine_file_path%'}
+            - {property: 'mfilePad', label: 'File', type: 'file', base_path: '/wdev_wannes/eindwerk/%uploads_machine_file_path%'}
 
 
   #Shop--------------------------------------------------------------------------------------------------------------------
@@ -328,6 +336,7 @@ easy_admin:
         class: App\Entity\Fabmoment
         list:
           actions: ['-new']
+          batch_actions: ['delete']
           sort: 'fabDatum'
           fields:
             - {property: 'fabIsPosted', label: 'Publiek'}
@@ -357,13 +366,13 @@ easy_admin:
           actions: ['-edit', '-new']
           fields:
             - {property: 'fabimgFab', label: 'Fabmoment'}
-            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_fab_img_path%'}
+            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_fab_img_path%'}
         show:
           actions: ['-edit']
           fields:
             - {property: 'fabimgFab', label: 'Fabmoment'}
             - {property: 'fabimgImgPad', label: 'Afbeelding'}
-            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_fab_img_path%'}
+            - {property: 'fabimgImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_fab_img_path%'}
 
       FabFile:
         class: App\Entity\FabFile
@@ -443,7 +452,7 @@ easy_admin:
             - {property: 'eveMetInschrijvingen', label: 'Met inschrijvingen'}
             - {property: 'eveMaxPers', label: 'Max. Deelnemers'}
             - {property: 'evePrijs', label: 'Prijs' }
-            - {property: 'eveImgPad', type: 'image', label: 'Afbeelding', base_path: '%uploads_eve_img_path%'}
+            - {property: 'eveImgPad', type: 'image', label: 'Afbeelding', base_path: '/wdev_wannes/eindwerk/%uploads_eve_img_path%'}
             - {property: 'inschrijvings', label: 'Inschrijvingen'}
 
 

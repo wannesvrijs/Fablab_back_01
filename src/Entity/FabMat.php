@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FabMatRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 //     TODO:
 /**
@@ -45,7 +46,7 @@ class FabMat
      * @ORM\ManyToOne(targetEntity=Materiaal::class, inversedBy="fabMats")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"fabmoment:item:read", "fabmoment:write"})
-     *
+     * @Assert\NotBlank(message="Duid een geldige techniek aan.")
      */
     private $fabmatMat;
 

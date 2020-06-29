@@ -50,6 +50,7 @@ security:
 
 
     access_control:
+        - { path: ^/deploy_now, roles: ROLE_ADMIN }
         - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

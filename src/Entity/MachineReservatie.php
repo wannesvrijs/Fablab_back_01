@@ -38,7 +38,7 @@ class MachineReservatie
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineStaten")
+     * @ORM\ManyToOne(targetEntity=Machine::class, inversedBy="machineReservaties")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"machinereservatie:read", "admin:write"})
      */
